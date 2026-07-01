@@ -3,132 +3,390 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign Up - NeverMiss AI</title>
+<title>Dashboard - NeverMiss AI</title>
 <style>
-.auth-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #0a0a0a;
-}
-.auth-box {
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; color: white; font-family: sans-serif; }
+.navbar {
   background: #111;
-  border: 1px solid #1a3a2a;
-  border-radius: 16px;
-  padding: 40px;
-  width: 100%;
-  max-width: 400px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1a3a2a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.auth-logo h1 {
+.logo { color: #00c853; font-size: 22px; font-weight: 800; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.user-badge {
+  background: #1a3a2a;
   color: #00c853;
-  font-size: 24px;
-  text-align: center;
-  margin-bottom: 20px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
 }
-.auth-title {
-  color: white;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  text-align: center;
-}
-.auth-subtitle {
-  color: #666;
-  text-align: center;
-  margin-bottom: 30px;
-}
-.form-group {
-  margin-bottom: 20px;
-}
-.form-group label {
-  display: block;
-  color: #ccc;
-  margin-bottom: 8px;
+.logout-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #999;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
   font-size: 14px;
 }
-.form-group input {
+.logout-btn:hover { border-color: #ff4444; color: #ff4444; }
+.page { padding: 32px 24px; max-width: 1100px; margin: 0 auto; }
+.welcome-section { margin-bottom: 28px; }
+.welcome-title { font-size: 30px; font-weight: 800; }
+.welcome-title span { color: #00c853; }
+.welcome-sub { color: #666; margin-top: 6px; font-size: 15px; }
+.trial-bar {
+  background: linear-gradient(135deg, #0a2a1a, #0d3320);
+  border: 1px solid #00c853;
+  border-radius: 14px;
+  padding: 18px 24px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.trial-info h3 { color: #00c853; font-size: 16px; font-weight: 700; }
+.trial-info p { color: #666; font-size: 13px; margin-top: 4px; }
+.upgrade-btn {
+  background: #00c853;
+  color: #000;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.upgrade-btn:hover { background: #00a846; }
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+@media(max-width: 700px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+.stat {
+  background: #111;
+  border: 1px solid #1a3a2a;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.stat-num { font-size: 34px; font-weight: 800; color: #00c853; }
+.stat-lbl { color: #555; font-size: 12px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.section-head { font-size: 20px; font-weight: 700; margin-bottom: 18px; color: #eee; }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 32px;
+}
+@media(max-width: 700px) { .features-grid { grid-template-columns: 1fr; } }
+.fcard {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 26px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.fcard:hover { border-color: #00c853; transform: translateY(-2px); }
+.fcard-icon { font-size: 40px; margin-bottom: 14px; }
+.fcard-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.fcard-desc { color: #555; font-size: 13px; line-height: 1.6; margin-bottom: 18px; }
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-green { background: #0a2a1a; color: #00c853; border: 1px solid #00c853; }
+.badge-blue { background: #0a0a2a; color: #6666ff; border: 1px solid #6666ff; }
+.badge-ready { background: #1a2a0a; color: #88ff44; border: 1px solid #88ff44; }
+.fcard-btn {
   width: 100%;
-  padding: 12px 16px;
+  padding: 11px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-g { background: #00c853; color: #000; }
+.btn-g:hover { background: #00a846; }
+.btn-o { background: transparent; border: 1px solid #444; color: #888; }
+.activity-box {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 32px;
+}
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: #444;
+}
+.empty-icon { font-size: 52px; margin-bottom: 14px; }
+.empty p { font-size: 15px; }
+.empty small { font-size: 13px; margin-top: 6px; display: block; }
+
+/* PROMO MODAL */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+.overlay.show { display: flex; }
+.modal {
+  background: #111;
+  border: 1px solid #1a3a2a;
+  border-radius: 18px;
+  padding: 32px;
+  width: 92%;
+  max-width: 480px;
+}
+.modal h3 { font-size: 22px; font-weight: 800; margin-bottom: 22px; }
+.minput {
+  width: 100%;
+  padding: 13px 16px;
   background: #1a1a1a;
   border: 1px solid #333;
-  border-radius: 8px;
+  border-radius: 9px;
   color: white;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-.form-group input:focus {
+  font-size: 15px;
+  margin-bottom: 14px;
   outline: none;
-  border-color: #00c853;
 }
-.btn-primary {
+.minput:focus { border-color: #00c853; }
+.mselect {
   width: 100%;
-  padding: 14px;
+  padding: 13px 16px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 9px;
+  color: white;
+  font-size: 15px;
+  margin-bottom: 14px;
+  outline: none;
+}
+.promo-card {
+  display: none;
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+  margin: 18px 0;
+}
+.promo-card.show { display: block; }
+.promo-offer-text { font-size: 38px; font-weight: 900; }
+.promo-biz { font-size: 17px; margin-top: 8px; opacity: 0.9; }
+.promo-footer { font-size: 12px; margin-top: 10px; opacity: 0.6; }
+.mbtns { display: flex; gap: 10px; margin-top: 6px; }
+.mbtn-cancel {
+  padding: 11px 18px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.mbtn-gen {
+  flex: 1;
+  padding: 11px;
   background: #00c853;
   color: #000;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-}
-.auth-footer {
-  text-align: center;
-  margin-top: 20px;
-  color: #666;
-}
-.auth-footer a {
-  color: #00c853;
-  text-decoration: none;
+  font-size: 14px;
 }
 </style>
 </head>
 <body>
-<div class="auth-container">
-  <div class="auth-box">
-    <div class="auth-logo">
-      <h1>🟢 NeverMiss AI</h1>
+
+<nav class="navbar">
+  <div class="logo">🟢 NeverMiss AI</div>
+  <div class="nav-right">
+    <span class="user-badge" id="userBadge">Loading...</span>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="welcome-section">
+    <div class="welcome-title">Welcome back, <span id="bizName">Business</span>! 👋</div>
+    <div class="welcome-sub">Your AI-powered client recovery system is ready</div>
+  </div>
+
+  <div class="trial-bar">
+    <div class="trial-info">
+      <h3>🎉 7-Day Free Trial Active</h3>
+      <p>Upgrade anytime to keep all features and start recovering clients</p>
     </div>
-    <h2 class="auth-title">Get Started Free</h2>
-    <p class="auth-subtitle">14-day free trial. No credit card required.</p>
-    <div class="form-group">
-      <label>Business Name</label>
-      <input type="text" id="business" placeholder="Your Business Name">
+    <button class="upgrade-btn" onclick="alert('Payment system coming soon!')">Upgrade to Pro — $99/mo 🚀</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-lbl">📞 Missed Calls</div>
     </div>
-    <div class="form-group">
-      <label>Email Address</label>
-      <input type="email" id="email" placeholder="you@business.com">
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-lbl">💬 Texts Sent</div>
     </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="password" placeholder="••••••••">
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-lbl">📅 Bookings</div>
     </div>
-    <button class="btn-primary" onclick="signup()">Start Free Trial</button>
-    <div class="auth-footer">
-      <p>Already have an account? <a href="login.html">Login</a></p>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-lbl">💰 Recovered</div>
+    </div>
+  </div>
+
+  <div class="section-head">🚀 Your Features</div>
+
+  <div class="features-grid">
+
+    <div class="fcard">
+      <div class="fcard-icon">📞</div>
+      <div class="fcard-title">Missed Call Text Back</div>
+      <span class="badge badge-green">Setup Required</span>
+      <div class="fcard-desc">Automatically sends a text to every missed caller instantly — so you never lose a client while you're busy!</div>
+      <button class="fcard-btn btn-g" onclick="alert('Connect your phone number! Twilio setup coming next.')">Connect Phone Number →</button>
+    </div>
+
+    <div class="fcard">
+      <div class="fcard-icon">🤖</div>
+      <div class="fcard-title">AI Chatbot</div>
+      <span class="badge badge-green">Setup Required</span>
+      <div class="fcard-desc">AI answers customer questions 24/7 and books appointments automatically — even while you sleep!</div>
+      <button class="fcard-btn btn-g" onclick="alert('AI Chatbot coming in next update!')">Setup AI Chatbot →</button>
+    </div>
+
+    <div class="fcard">
+      <div class="fcard-icon">📅</div>
+      <div class="fcard-title">Appointment Booking</div>
+      <span class="badge badge-green">Setup Required</span>
+      <div class="fcard-desc">Let customers book appointments 24/7 through SMS. Your calendar fills up automatically!</div>
+      <button class="fcard-btn btn-g" onclick="alert('Booking system coming in next update!')">Setup Booking →</button>
+    </div>
+
+    <div class="fcard">
+      <div class="fcard-icon">🎨</div>
+      <div class="fcard-title">Promo Creator</div>
+      <span class="badge badge-ready">✅ Ready to Use!</span>
+      <div class="fcard-desc">Create stunning promotional offers in seconds! Perfect for Instagram, Facebook & SMS blasts!</div>
+      <button class="fcard-btn btn-g" onclick="openPromo()">Create Promo Now →</button>
+    </div>
+
+  </div>
+
+  <div class="section-head">📋 Recent Activity</div>
+  <div class="activity-box">
+    <div class="empty">
+      <div class="empty-icon">📭</div>
+      <p>No activity yet!</p>
+      <small>Connect your phone number to start recovering missed calls automatically.</small>
+    </div>
+  </div>
+
+</div>
+
+<!-- PROMO CREATOR -->
+<div class="overlay" id="promoOverlay">
+  <div class="modal">
+    <h3>🎨 Create Promo Offer</h3>
+    <input class="minput" id="promoText" placeholder="e.g. 50% OFF Today Only!">
+    <input class="minput" id="promoBiz" placeholder="Your Business Name">
+    <select class="mselect" id="promoColor">
+      <option value="linear-gradient(135deg,#0a2a1a,#1a4a2a)" data-text="#00c853">🟢 Green Theme</option>
+      <option value="linear-gradient(135deg,#1a0a2a,#2a1a4a)" data-text="#aa66ff">🟣 Purple Theme</option>
+      <option value="linear-gradient(135deg,#2a0a0a,#4a1a1a)" data-text="#ff4444">🔴 Red Theme</option>
+      <option value="linear-gradient(135deg,#1a1a0a,#3a2a0a)" data-text="#ffaa00">🟡 Gold Theme</option>
+    </select>
+    <div class="promo-card" id="promoCard">
+      <div class="promo-offer-text" id="promoOfferDisplay"></div>
+      <div class="promo-biz" id="promoBizDisplay"></div>
+      <div class="promo-footer">Valid Today Only • Book Now! 📞</div>
+    </div>
+    <div class="mbtns">
+      <button class="mbtn-cancel" onclick="closePromo()">Cancel</button>
+      <button class="mbtn-gen" onclick="generatePromo()">✨ Generate Promo!</button>
     </div>
   </div>
 </div>
+
 <script>
-function signup() {
-  const business = document.getElementById('business').value;
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-  if (!business || !email || !password) {
-    alert('Please fill in all fields!');
+// Load user
+const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+if (user) {
+  document.getElementById('bizName').textContent = user.business || 'Business';
+  document.getElementById('userBadge').textContent = user.business || user.email;
+} else {
+  document.getElementById('bizName').textContent = 'Business';
+  document.getElementById('userBadge').textContent = 'Guest';
+}
+
+function logout() {
+  localStorage.removeItem('currentUser');
+  window.location.href = 'index.html';
+}
+
+function openPromo() {
+  document.getElementById('promoOverlay').classList.add('show');
+}
+
+function closePromo() {
+  document.getElementById('promoOverlay').classList.remove('show');
+  document.getElementById('promoCard').classList.remove('show');
+  document.getElementById('promoText').value = '';
+  document.getElementById('promoBiz').value = '';
+}
+
+function generatePromo() {
+  const text = document.getElementById('promoText').value.trim();
+  const biz = document.getElementById('promoBiz').value.trim();
+  const select = document.getElementById('promoColor');
+  const bg = select.value;
+  const color = select.options[select.selectedIndex].getAttribute('data-text');
+
+  if (!text || !biz) {
+    alert('Please fill in your offer and business name!');
     return;
   }
-  const users = JSON.parse(localStorage.getItem('users') || '[]');
-  const exists = users.find(u => u.email === email);
-  if (exists) {
-    alert('Email already registered! Please login.');
-    return;
-  }
-  const newUser = { business, email, password };
-  users.push(newUser);
-  localStorage.setItem('users', JSON.stringify(users));
-  localStorage.setItem('currentUser', JSON.stringify(newUser));
-  window.location.href = 'dashboard.html';
+
+  const card = document.getElementById('promoCard');
+  card.style.background = bg;
+  document.getElementById('promoOfferDisplay').style.color = color;
+  document.getElementById('promoOfferDisplay').textContent = text;
+  document.getElementById('promoBizDisplay').textContent = biz;
+  card.classList.add('show');
 }
 </script>
 </body>
