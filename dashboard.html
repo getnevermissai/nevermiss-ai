@@ -39,10 +39,9 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
 }
 .logout-btn:hover { border-color: #ff4444; color: #ff4444; }
 .page { padding: 32px 24px; max-width: 1100px; margin: 0 auto; }
-.welcome-section { margin-bottom: 28px; }
-.welcome-title { font-size: 30px; font-weight: 800; }
+.welcome-title { font-size: 30px; font-weight: 800; margin-bottom: 6px; }
 .welcome-title span { color: #00c853; }
-.welcome-sub { color: #666; margin-top: 6px; font-size: 15px; }
+.welcome-sub { color: #666; margin-bottom: 28px; font-size: 15px; }
 .trial-bar {
   background: linear-gradient(135deg, #0a2a1a, #0d3320);
   border: 1px solid #00c853;
@@ -66,16 +65,13 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   font-weight: 800;
   cursor: pointer;
   font-size: 14px;
-  white-space: nowrap;
 }
-.upgrade-btn:hover { background: #00a846; }
 .stats-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
   margin-bottom: 32px;
 }
-@media(max-width: 700px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
 .stat {
   background: #111;
   border: 1px solid #1a3a2a;
@@ -84,23 +80,20 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   text-align: center;
 }
 .stat-num { font-size: 34px; font-weight: 800; color: #00c853; }
-.stat-lbl { color: #555; font-size: 12px; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-.section-head { font-size: 20px; font-weight: 700; margin-bottom: 18px; color: #eee; }
+.stat-lbl { color: #555; font-size: 12px; margin-top: 6px; text-transform: uppercase; }
+.section-head { font-size: 20px; font-weight: 700; margin-bottom: 18px; }
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 18px;
   margin-bottom: 32px;
 }
-@media(max-width: 700px) { .features-grid { grid-template-columns: 1fr; } }
 .fcard {
   background: #111;
   border: 1px solid #222;
   border-radius: 16px;
   padding: 26px;
   transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
 }
 .fcard:hover { border-color: #00c853; transform: translateY(-2px); }
 .fcard-icon { font-size: 40px; margin-bottom: 14px; }
@@ -114,10 +107,8 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   font-weight: 700;
   margin-bottom: 14px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 .badge-green { background: #0a2a1a; color: #00c853; border: 1px solid #00c853; }
-.badge-blue { background: #0a0a2a; color: #6666ff; border: 1px solid #6666ff; }
 .badge-ready { background: #1a2a0a; color: #88ff44; border: 1px solid #88ff44; }
 .fcard-btn {
   width: 100%;
@@ -127,11 +118,9 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   cursor: pointer;
   font-size: 14px;
   border: none;
-  transition: all 0.2s;
 }
 .btn-g { background: #00c853; color: #000; }
 .btn-g:hover { background: #00a846; }
-.btn-o { background: transparent; border: 1px solid #444; color: #888; }
 .activity-box {
   background: #111;
   border: 1px solid #1a1a1a;
@@ -139,14 +128,8 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   padding: 28px;
   margin-bottom: 32px;
 }
-.empty {
-  text-align: center;
-  padding: 40px;
-  color: #444;
-}
+.empty { text-align: center; padding: 40px; color: #444; }
 .empty-icon { font-size: 52px; margin-bottom: 14px; }
-.empty p { font-size: 15px; }
-.empty small { font-size: 13px; margin-top: 6px; display: block; }
 
 /* PROMO MODAL */
 .overlay {
@@ -210,7 +193,6 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   color: #888;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
 }
 .mbtn-gen {
   flex: 1;
@@ -221,14 +203,13 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
   border-radius: 8px;
   font-weight: 800;
   cursor: pointer;
-  font-size: 14px;
 }
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <div class="logo">🟢 CallZap ⚡</div>
+  <div class="logo">CallZap ⚡</div>
   <div class="nav-right">
     <span class="user-badge" id="userBadge">Loading...</span>
     <button class="logout-btn" onclick="logout()">Logout</button>
@@ -236,16 +217,13 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
 </nav>
 
 <div class="page">
-
-  <div class="welcome-section">
-    <div class="welcome-title">Welcome back, <span id="bizName">Business</span>! 👋</div>
-    <div class="welcome-sub">Your AI-powered client recovery system is ready</div>
-  </div>
+  <div class="welcome-title">Welcome back, <span id="bizName">Business</span>! 👋</div>
+  <div class="welcome-sub">Your AI-powered missed call recovery system ⚡</div>
 
   <div class="trial-bar">
     <div class="trial-info">
-      <h3>🎉 7-Day Free Trial Active</h3>
-      <p>Upgrade anytime to keep all features and start recovering clients</p>
+      <h3>⚡ 7-Day Free Trial Active</h3>
+      <p>Upgrade anytime to keep recovering missed clients!</p>
     </div>
     <button class="upgrade-btn" onclick="alert('Payment system coming soon!')">Upgrade to Pro — $99/mo 🚀</button>
   </div>
@@ -269,42 +247,40 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
     </div>
   </div>
 
-  <div class="section-head">🚀 Your Features</div>
+  <div class="section-head">⚡ Your Features</div>
 
   <div class="features-grid">
-
     <div class="fcard">
       <div class="fcard-icon">📞</div>
       <div class="fcard-title">Missed Call Text Back</div>
       <span class="badge badge-green">Setup Required</span>
-      <div class="fcard-desc">Automatically sends a text to every missed caller instantly — so you never lose a client while you're busy!</div>
-      <button class="fcard-btn btn-g" onclick="alert('Connect your phone number! Twilio setup coming next.')">Connect Phone Number →</button>
+      <div class="fcard-desc">Automatically sends a text to every missed caller instantly — so you never lose a client!</div>
+      <button class="fcard-btn btn-g" onclick="alert('Connect your phone number! Coming soon.')">Connect Phone Number →</button>
     </div>
 
     <div class="fcard">
       <div class="fcard-icon">🤖</div>
       <div class="fcard-title">AI Chatbot</div>
       <span class="badge badge-green">Setup Required</span>
-      <div class="fcard-desc">AI answers customer questions 24/7 and books appointments automatically — even while you sleep!</div>
-      <button class="fcard-btn btn-g" onclick="alert('AI Chatbot coming in next update!')">Setup AI Chatbot →</button>
+      <div class="fcard-desc">AI answers customer questions 24/7 and books appointments automatically!</div>
+      <button class="fcard-btn btn-g" onclick="alert('AI Chatbot coming soon!')">Setup AI Chatbot →</button>
     </div>
 
     <div class="fcard">
       <div class="fcard-icon">📅</div>
       <div class="fcard-title">Appointment Booking</div>
       <span class="badge badge-green">Setup Required</span>
-      <div class="fcard-desc">Let customers book appointments 24/7 through SMS. Your calendar fills up automatically!</div>
-      <button class="fcard-btn btn-g" onclick="alert('Booking system coming in next update!')">Setup Booking →</button>
+      <div class="fcard-desc">Let customers book appointments 24/7 through SMS automatically!</div>
+      <button class="fcard-btn btn-g" onclick="alert('Booking system coming soon!')">Setup Booking →</button>
     </div>
 
     <div class="fcard">
       <div class="fcard-icon">🎨</div>
       <div class="fcard-title">Promo Creator</div>
-      <span class="badge badge-ready">✅ Ready to Use!</span>
-      <div class="fcard-desc">Create stunning promotional offers in seconds! Perfect for Instagram, Facebook & SMS blasts!</div>
+      <span class="badge badge-ready">✅ Ready!</span>
+      <div class="fcard-desc">Create stunning promotional offers instantly for Instagram and Facebook!</div>
       <button class="fcard-btn btn-g" onclick="openPromo()">Create Promo Now →</button>
     </div>
-
   </div>
 
   <div class="section-head">📋 Recent Activity</div>
@@ -312,13 +288,12 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
     <div class="empty">
       <div class="empty-icon">📭</div>
       <p>No activity yet!</p>
-      <small>Connect your phone number to start recovering missed calls automatically.</small>
+      <small style="display:block;margin-top:8px;font-size:13px">Connect your phone number to start recovering missed calls.</small>
     </div>
   </div>
-
 </div>
 
-<!-- PROMO CREATOR -->
+<!-- PROMO MODAL -->
 <div class="overlay" id="promoOverlay">
   <div class="modal">
     <h3>🎨 Create Promo Offer</h3>
@@ -337,13 +312,12 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
     </div>
     <div class="mbtns">
       <button class="mbtn-cancel" onclick="closePromo()">Cancel</button>
-      <button class="mbtn-gen" onclick="generatePromo()">✨ Generate Promo!</button>
+      <button class="mbtn-gen" onclick="generatePromo()">✨ Generate!</button>
     </div>
   </div>
 </div>
 
 <script>
-// Load user
 const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
 if (user) {
   document.getElementById('bizName').textContent = user.business || 'Business';
@@ -375,12 +349,10 @@ function generatePromo() {
   const select = document.getElementById('promoColor');
   const bg = select.value;
   const color = select.options[select.selectedIndex].getAttribute('data-text');
-
   if (!text || !biz) {
-    alert('Please fill in your offer and business name!');
+    alert('Please fill in both fields!');
     return;
   }
-
   const card = document.getElementById('promoCard');
   card.style.background = bg;
   document.getElementById('promoOfferDisplay').style.color = color;
