@@ -368,7 +368,7 @@ footer span { color: #00c853; }
         <li>Email notifications</li>
         <li>Basic analytics dashboard</li>
       </ul>
-      <a href="signup.html" class="plan-btn outline">Get Started Free</a>
+      <button class="plan-btn outline" onclick="openCheckout('basic')">Get Started Free</button>
     </div>
     <div class="pcard popular">
       <div class="popular-badge">⚡ Most Popular</div>
@@ -383,7 +383,7 @@ footer span { color: #00c853; }
         <li>Priority support 24/7</li>
         <li>Full analytics & reports</li>
       </ul>
-      <a href="signup.html" class="plan-btn">Start Free Trial ⚡</a>
+      <button class="plan-btn" onclick="openCheckout('pro')">Start Free Trial ⚡</button>
     </div>
   </div>
 </div>
@@ -459,6 +459,7 @@ footer span { color: #00c853; }
   <p>© 2026 <span>CallZap</span> ⚡ — Instant Reply to Every Missed Call</p>
   <p style="margin-top:8px">Built for local businesses worldwide 🌍</p>
 </footer>
-
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script src="checkout.js"></script>
 </body>
 </html>
