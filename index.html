@@ -495,7 +495,7 @@ const PADDLE_PRICES = {
   basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
   pro: 'pri_01kwxky4wgbefspqr4h2ezzpnq'
 };
-
+Paddle.Initialize({ token: 'live_1d9f7803622379df074bc2d7ee1' });
 function openCheckout(plan) {
   Paddle.Checkout.open({
     items: [{ priceId: PADDLE_PRICES[plan], quantity: 1 }]
