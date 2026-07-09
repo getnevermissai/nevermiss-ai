@@ -485,44 +485,34 @@ footer a:hover { color: #00c853; }
   </p>
 </footer>
 
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
-}
-
-window.addEventListener('load', function() {
-  Paddle.Initialize({
-    token: 'live_1d9f7803622379df074bc2d7ee1'
-  });
-});
-
-function openCheckout(plan) {
-  const prices = {
-    basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
-    pro: 'pri_01kwxky4wgbefspqr4h2ezzpnq'
-  };
-  Paddle.Checkout.open({
-    items: [{ priceId: prices[plan], quantity: 1 }]
-  });
 }
 </script>
-<script>
-function toggleMenu() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
 
-const PADDLE_PRICES = {
-  basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
-  pro: 'pri_01kwxky4wgbefspqr4h2ezzpnq'
-};
-Paddle.Setup({ vendor: 373325 });
-Paddle.Initialize({ token: 'live_1d9f7803622379df074bc2d7ee1' });
-function openCheckout(plan) {
-  Paddle.Checkout.open({
-    items: [{ priceId: PADDLE_PRICES[plan], quantity: 1 }]
-  });
-}
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+
+<script>
+  Paddle.Initialize({ token: 'live_1d9f7803622379df074bc2d7ee1' });
+
+  function openCheckout(plan) {
+    const prices = {
+      basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
+      pro: 'pri_01kwxky4wgbefspqr4h2ezzpnq'
+    };
+    Paddle.Checkout.open({
+      items: [{
+        priceId: prices[plan],
+        quantity: 1
+      }],
+      settings: {
+        displayMode: 'overlay',
+        theme: 'dark',
+        locale: 'en'
+      }
+    });
+  }
 </script>
 </body>
 </html>
