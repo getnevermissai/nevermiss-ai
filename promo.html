@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promo Creator - CallZap ⚡</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; color: white; font-family: sans-serif; min-height: 100vh; }
+.navbar {
+  background: #111; padding: 16px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid #1a3a2a;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { color: #00c853; font-size: 20px; font-weight: 900; }
+.back-btn {
+  background: transparent; border: 1px solid #333;
+  color: #888; padding: 8px 16px; border-radius: 8px;
+  cursor: pointer; text-decoration: none; font-size: 14px;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+.page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.page-title span { color: #00c853; }
+.page-sub { color: #555; margin-bottom: 32px; }
+
+.creator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media(max-width:700px){ .creator-grid { grid-template-columns: 1fr; } }
+
+/* LEFT SIDE - Controls */
+.controls {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 24px;
+}
+.control-section { margin-bottom: 24px; }
+.control-label {
+  color: #888; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 10px; display: block;
+}
+.control-input {
+  width: 100%; padding: 12px 16px;
+  background: #1a1a1a; border: 1px solid #333;
+  border-radius: 8px; color: white; font-size: 15px;
+  outline: none; margin-bottom: 10px;
+}
+.control-input:focus { border-color: #00c853; }
+
+/* TEMPLATES */
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.template-btn {
+  padding: 12px 8px;
+  border-radius: 10px;
+  border: 2px solid #222;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  transition: all 0.2s;
+  color: white;
+}
+.template-btn:hover { transform: scale(1.05); }
+.template-btn.active { border-color: #00c853 !important; }
+.t1 { background: linear-gradient(135deg, #1a0a2a, #2a1a4a); }
+.t2 { background: linear-gradient(135deg, #0a2a1a, #1a4a2a); }
+.t3 { background: linear-gradient(135deg, #2a0a0a, #4a1a1a); }
+.t4 { background: linear-gradient(135deg, #1a1a0a, #3a2a0a); }
+.t5 { background: linear-gradient(135deg, #0a1a2a, #1a2a4a); }
+.t6 { background: linear-gradient(135deg, #2a1a0a, #4a2a1a); }
+
+/* BUSINESS TYPE */
+.business-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.biz-btn {
+  padding: 10px 6px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  cursor: pointer;
+  font-size: 11px;
+  text-align: center;
+  color: #888;
+  transition: all 0.2s;
+}
+.biz-btn:hover { border-color: #00c853; color: white; }
+.biz-btn.active { border-color: #00c853; color: #00c853; background: #0a2a1a; }
+
+.generate-btn {
+  width: 100%; padding: 14px;
+  background: #00c853; color: #000;
+  border: none; border-radius: 10px;
+  font-weight: 800; font-size: 16px;
+  cursor: pointer; margin-top: 8px;
+}
+.generate-btn:hover { background: #00a846; }
+
+/* RIGHT SIDE - Preview */
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.preview-label {
+  color: #888; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* PROMO CANVAS */
+.promo-canvas {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #222;
+  background: linear-gradient(135deg, #1a0a2a, #2a1a4a);
+  min-height: 300px;
+}
+.promo-emoji { font-size: 48px; margin-bottom: 12px; }
+.promo-business-type {
+  font-size: 12px; letter-spacing: 3px;
+  text-transform: uppercase; opacity: 0.7;
+  margin-bottom: 8px;
+}
+.promo-business-name {
+  font-size: 22px; font-weight: 900;
+  margin-bottom: 16px;
+}
+.promo-divider {
+  width: 60px; height: 3px;
+  background: currentColor;
+  margin: 0 auto 16px;
+  border-radius: 2px;
+}
+.promo-offer-big {
+  font-size: 48px; font-weight: 900;
+  line-height: 1.1; margin-bottom: 8px;
+}
+.promo-subtitle {
+  font-size: 16px; opacity: 0.8;
+  margin-bottom: 20px;
+}
+.promo-validity {
+  font-size: 12px; opacity: 0.6;
+  border: 1px solid currentColor;
+  padding: 6px 16px; border-radius: 20px;
+  margin-bottom: 16px;
+}
+.promo-cta {
+  font-size: 14px; font-weight: 700;
+  padding: 10px 24px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.promo-website {
+  font-size: 11px; opacity: 0.5;
+}
+
+/* DOWNLOAD BUTTONS */
+.download-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.dl-btn {
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+.dl-instagram {
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+}
+.dl-whatsapp { background: #25D366; color: white; }
+
+/* EMPTY STATE */
+.empty-preview {
+  width: 100%; aspect-ratio: 1;
+  border-radius: 16px;
+  border: 2px dashed #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  min-height: 300px;
+}
+.empty-preview .empty-icon { font-size: 48px; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">CallZap ⚡</div>
+  <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
+</nav>
+
+<div class="container">
+  <div class="page-title">🎨 Promo <span>Creator</span></div>
+  <p class="page-sub">Create stunning promotional graphics for Instagram, Facebook & WhatsApp in seconds!</p>
+
+  <div class="creator-grid">
+
+    <!-- LEFT - CONTROLS -->
+    <div class="controls">
+
+      <div class="control-section">
+        <span class="control-label">🏢 Business Type</span>
+        <div class="business-grid">
+          <button class="biz-btn active" onclick="setBiz(this,'💇','Salon')">💇 Salon</button>
+          <button class="biz-btn" onclick="setBiz(this,'☕','Cafe')">☕ Cafe</button>
+          <button class="biz-btn" onclick="setBiz(this,'🔧','Plumber')">🔧 Plumber</button>
+          <button class="biz-btn" onclick="setBiz(this,'🦷','Dental')">🦷 Dental</button>
+          <button class="biz-btn" onclick="setBiz(this,'🍕','Restaurant')">🍕 Restaurant</button>
+          <button class="biz-btn" onclick="setBiz(this,'💪','Gym')">💪 Gym</button>
+          <button class="biz-btn" onclick="setBiz(this,'🏠','Real Estate')">🏠 Real Estate</button>
+          <button class="biz-btn" onclick="setBiz(this,'💅','Nail Spa')">💅 Nail Spa</button>
+          <button class="biz-btn" onclick="setBiz(this,'🐾','Pet Care')">🐾 Pet Care</button>
+        </div>
+      </div>
+
+      <div class="control-section">
+        <span class="control-label">🏷️ Business Name</span>
+        <input class="control-input" id="bizName" placeholder="e.g. Sarah's Beauty Salon">
+      </div>
+
+      <div class="control-section">
+        <span class="control-label">🎯 Your Offer</span>
+        <input class="control-input" id="offerText" placeholder="e.g. 50% OFF Today Only!">
+        <input class="control-input" id="offerSub" placeholder="e.g. On all haircuts and styling">
+      </div>
+
+      <div class="control-section">
+        <span class="control-label">📅 Validity</span>
+        <input class="control-input" id="validity" placeholder="e.g. Today Only • Limited Slots!">
+      </div>
+
+      <div class="control-section">
+        <span class="control-label">🎨 Template Style</span>
+        <div class="templates-grid">
+          <button class="template-btn t1 active" onclick="setTemplate(this,'linear-gradient(135deg,#1a0a2a,#2a1a4a)','#aa66ff')">💜 Purple</button>
+          <button class="template-btn t2" onclick="setTemplate(this,'linear-gradient(135deg,#0a2a1a,#1a4a2a)','#00c853')">💚 Green</button>
+          <button class="template-btn t3" onclick="setTemplate(this,'linear-gradient(135deg,#2a0a0a,#4a1a1a)','#ff4444')">❤️ Red</button>
+          <button class="template-btn t4" onclick="setTemplate(this,'linear-gradient(135deg,#1a1a0a,#3a2a0a)','#ffaa00')">💛 Gold</button>
+          <button class="template-btn t5" onclick="setTemplate(this,'linear-gradient(135deg,#0a1a2a,#1a2a4a)','#4499ff')">💙 Blue</button>
+          <button class="template-btn t6" onclick="setTemplate(this,'linear-gradient(135deg,#2a1a0a,#4a2a1a)','#ff8800')">🧡 Orange</button>
+        </div>
+      </div>
+
+      <button class="generate-btn" onclick="generatePromo()">✨ Generate Promo!</button>
+
+    </div>
+
+    <!-- RIGHT - PREVIEW -->
+    <div class="preview-section">
+      <span class="preview-label">👀 Preview</span>
+
+      <div class="empty-preview" id="emptyState">
+        <div class="empty-icon">🎨</div>
+        <p>Fill in details and click Generate!</p>
+      </div>
+
+      <div class="promo-canvas" id="promoCanvas" style="display:none;">
+        <div class="promo-emoji" id="previewEmoji">💇</div>
+        <div class="promo-business-type" id="previewBizType">SALON</div>
+        <div class="promo-business-name" id="previewBizName">Your Business</div>
+        <div class="promo-divider" id="previewDivider"></div>
+        <div class="promo-offer-big" id="previewOffer">50% OFF!</div>
+        <div class="promo-subtitle" id="previewSub">On all services today</div>
+        <div class="promo-validity" id="previewValidity">Today Only • Limited Slots!</div>
+        <div class="promo-cta">📞 Call or Text Us Now!</div>
+        <div class="promo-website">callzap.co</div>
+      </div>
+
+      <div class="download-btns" id="downloadBtns" style="display:none;">
+        <button class="dl-btn dl-instagram" onclick="downloadPromo('instagram')">
+          📸 Download for Instagram
+        </button>
+        <button class="dl-btn dl-whatsapp" onclick="downloadPromo('whatsapp')">
+          💬 Download for WhatsApp
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let currentBizEmoji = '💇';
+let currentBizType = 'Salon';
+let currentBg = 'linear-gradient(135deg,#1a0a2a,#2a1a4a)';
+let currentColor = '#aa66ff';
+
+function setBiz(btn, emoji, type) {
+  document.querySelectorAll('.biz-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBizEmoji = emoji;
+  currentBizType = type;
+}
+
+function setTemplate(btn, bg, color) {
+  document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBg = bg;
+  currentColor = color;
+}
+
+function generatePromo() {
+  const bizName = document.getElementById('bizName').value || 'Your Business';
+  const offer = document.getElementById('offerText').value || '50% OFF Today!';
+  const sub = document.getElementById('offerSub').value || 'On all services';
+  const validity = document.getElementById('validity').value || 'Today Only • Limited Slots!';
+
+  // Update preview
+  document.getElementById('previewEmoji').textContent = currentBizEmoji;
+  document.getElementById('previewBizType').textContent = currentBizType.toUpperCase();
+  document.getElementById('previewBizName').textContent = bizName;
+  document.getElementById('previewOffer').textContent = offer;
+  document.getElementById('previewSub').textContent = sub;
+  document.getElementById('previewValidity').textContent = validity;
+
+  // Set colors
+  const canvas = document.getElementById('promoCanvas');
+  canvas.style.background = currentBg;
+  canvas.style.color = currentColor;
+  document.getElementById('previewDivider').style.background = currentColor;
+
+  // Show preview
+  document.getElementById('emptyState').style.display = 'none';
+  canvas.style.display = 'flex';
+  document.getElementById('downloadBtns').style.display = 'grid';
+}
+
+function downloadPromo(platform) {
+  const canvas = document.getElementById('promoCanvas');
+  html2canvas(canvas, {
+    scale: 3,
+    backgroundColor: null,
+    useCORS: true
+  }).then(c => {
+    const link = document.createElement('a');
+    link.download = `callzap-promo-${platform}.png`;
+    link.href = c.toDataURL('image/png');
+    link.click();
+  });
+}
+</script>
+</body>
+</html>
