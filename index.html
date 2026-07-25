@@ -575,56 +575,44 @@ style="
 ">✉️</a>
 </footer>
 
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
-</script>
 
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+Paddle.Initialize({ 
+  token: 'live_1d9f7803622379df074bc2d7ee1'
+});
 
-<script>
-  Paddle.Initialize({ token: 'live_1d9f7803622379df074bc2d7ee1' });
+const PADDLE_PRICES = {
+  basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
+  pro: 'pri_01kwxky4wgbefspqr4h2ezzpnq'
+};
 
-  function openCheckout(plan) {
-    const prices = {
-      basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
-      pro: 'pri_01kwxky4wgbefspqr4h2ezzpnq'
-    };
-    Paddle.Checkout.open({
-      items: [{
-        priceId: prices[plan],
-        quantity: 1
-      }],
-      settings: {
-        displayMode: 'overlay',
-        theme: 'dark',
-        locale: 'en'
-      }
-    });
-  }
-<script>
+function openCheckout(plan) {
+  Paddle.Checkout.open({
+    items: [{ priceId: PADDLE_PRICES[plan], quantity: 1 }]
+  });
+}
+
 function calculateRevenue() {
   const missed = parseInt(document.getElementById('missedCalls').value);
   const value = parseInt(document.getElementById('customerValue').value);
   const days = parseInt(document.getElementById('workDays').value);
-  
   document.getElementById('missedCallsValue').textContent = missed + ' calls/day';
   document.getElementById('customerValueDisplay').textContent = '$' + value + ' per visit';
   document.getElementById('workDaysDisplay').textContent = days + ' days/month';
-  
   const conversionRate = 0.4;
   const monthlyLoss = Math.round(missed * value * days * conversionRate);
   const yearlyLoss = monthlyLoss * 12;
   const roi = (monthlyLoss / 99).toFixed(1);
-  
   document.getElementById('lostRevenue').textContent = '$' + monthlyLoss.toLocaleString();
   document.getElementById('lostPerYear').textContent = '$' + yearlyLoss.toLocaleString();
   document.getElementById('roiValue').textContent = '$' + roi;
 }
 calculateRevenue();
 </script>
-
 </body>
 </html>
 
