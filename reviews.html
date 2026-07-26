@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews - CallZap ⚡</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; color: white; font-family: sans-serif; }
+.navbar {
+  background: #111; padding: 16px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid #1a3a2a;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo { color: #00c853; font-size: 20px; font-weight: 900; }
+.back-btn {
+  background: transparent; border: 1px solid #333;
+  color: #888; padding: 8px 16px; border-radius: 8px;
+  cursor: pointer; text-decoration: none; font-size: 14px;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+.page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.page-title span { color: #00c853; }
+.page-sub { color: #555; margin-bottom: 32px; }
+
+/* STATS */
+.review-stats {
+  background: #111;
+  border: 1px solid #1a3a2a;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.avg-rating { text-align: center; }
+.avg-number { font-size: 64px; font-weight: 900; color: #00c853; line-height: 1; }
+.avg-stars { font-size: 28px; color: #00c853; margin: 8px 0; }
+.avg-total { color: #555; font-size: 14px; }
+.rating-bars { flex: 1; min-width: 200px; }
+.bar-row {
+  display: flex; align-items: center;
+  gap: 10px; margin-bottom: 8px;
+}
+.bar-label { color: #888; font-size: 13px; width: 40px; }
+.bar-bg {
+  flex: 1; height: 8px;
+  background: #222; border-radius: 4px; overflow: hidden;
+}
+.bar-fill { height: 100%; background: #00c853; border-radius: 4px; }
+.bar-count { color: #555; font-size: 13px; width: 20px; }
+
+/* WRITE REVIEW */
+.write-review {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 32px;
+}
+.section-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+.star-select { display: flex; gap: 8px; margin-bottom: 20px; }
+.star-btn {
+  font-size: 32px; cursor: pointer;
+  background: none; border: none;
+  color: #333; transition: all 0.2s;
+}
+.star-btn.active { color: #00c853; }
+.review-input {
+  width: 100%; padding: 13px 16px;
+  background: #1a1a1a; border: 1px solid #333;
+  border-radius: 9px; color: white; font-size: 15px;
+  margin-bottom: 14px; outline: none;
+}
+.review-input:focus { border-color: #00c853; }
+textarea.review-input { height: 100px; resize: none; }
+.submit-btn {
+  background: #00c853; color: #000;
+  border: none; padding: 12px 28px;
+  border-radius: 8px; font-weight: 800;
+  font-size: 15px; cursor: pointer;
+}
+
+/* REVIEWS LIST */
+.reviews-list { display: flex; flex-direction: column; gap: 16px; }
+.review-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 22px;
+  transition: border-color 0.3s;
+}
+.review-card:hover { border-color: #00c853; }
+.review-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 12px;
+}
+.reviewer-info { display: flex; align-items: center; gap: 12px; }
+.reviewer-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #0a2a1a; border: 2px solid #00c853;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #00c853; font-size: 16px;
+}
+.reviewer-name { font-weight: 700; font-size: 15px; }
+.reviewer-business { color: #555; font-size: 12px; margin-top: 2px; }
+.review-stars { color: #00c853; font-size: 16px; }
+.review-date { color: #444; font-size: 12px; }
+.review-text { color: #888; font-size: 14px; line-height: 1.7; }
+.verified-badge {
+  display: inline-block;
+  background: #0a2a1a; color: #00c853;
+  border: 1px solid #00c853;
+  padding: 2px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 600;
+  margin-top: 10px;
+}
+
+/* EMPTY STATE */
+.empty-reviews {
+  text-align: center; padding: 48px;
+  color: #444; background: #111;
+  border: 1px dashed #333; border-radius: 14px;
+}
+.empty-icon { font-size: 48px; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">CallZap ⚡</div>
+  <a href="index.html" class="back-btn">← Back to Home</a>
+</nav>
+
+<div class="container">
+  <div class="page-title">⭐ Customer <span>Reviews</span></div>
+  <p class="page-sub">See what businesses say about CallZap!</p>
+
+  <!-- STATS -->
+  <div class="review-stats">
+    <div class="avg-rating">
+      <div class="avg-number" id="avgRating">0.0</div>
+      <div class="avg-stars" id="avgStars">☆☆☆☆☆</div>
+      <div class="avg-total" id="totalReviews">0 reviews</div>
+    </div>
+    <div class="rating-bars">
+      <div class="bar-row">
+        <span class="bar-label">5 ⭐</span>
+        <div class="bar-bg"><div class="bar-fill" id="bar5" style="width:0%"></div></div>
+        <span class="bar-count" id="count5">0</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">4 ⭐</span>
+        <div class="bar-bg"><div class="bar-fill" id="bar4" style="width:0%"></div></div>
+        <span class="bar-count" id="count4">0</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">3 ⭐</span>
+        <div class="bar-bg"><div class="bar-fill" id="bar3" style="width:0%"></div></div>
+        <span class="bar-count" id="count3">0</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">2 ⭐</span>
+        <div class="bar-bg"><div class="bar-fill" id="bar2" style="width:0%"></div></div>
+        <span class="bar-count" id="count2">0</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">1 ⭐</span>
+        <div class="bar-bg"><div class="bar-fill" id="bar1" style="width:0%"></div></div>
+        <span class="bar-count" id="count1">0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WRITE REVIEW -->
+  <div class="write-review">
+    <div class="section-title">✍️ Write a Review</div>
+    <div class="star-select" id="starSelect">
+      <button class="star-btn" onclick="setRating(1)">★</button>
+      <button class="star-btn" onclick="setRating(2)">★</button>
+      <button class="star-btn" onclick="setRating(3)">★</button>
+      <button class="star-btn" onclick="setRating(4)">★</button>
+      <button class="star-btn" onclick="setRating(5)">★</button>
+    </div>
+    <input class="review-input" id="reviewName" placeholder="Your Name">
+    <input class="review-input" id="reviewBusiness" placeholder="Your Business Name">
+    <textarea class="review-input" id="reviewText" placeholder="Share your experience with CallZap..."></textarea>
+    <button class="submit-btn" onclick="submitReview()">Submit Review ⭐</button>
+  </div>
+
+  <!-- REVIEWS LIST -->
+  <div class="section-title">💬 All Reviews</div>
+  <div class="reviews-list" id="reviewsList">
+    <div class="empty-reviews" id="emptyState">
+      <div class="empty-icon">⭐</div>
+      <p>No reviews yet!</p>
+      <p style="margin-top:8px;font-size:13px">Be the first to review CallZap!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedRating = 0;
+let reviews = JSON.parse(localStorage.getItem('callzap_reviews') || '[]');
+
+// Add demo reviews
+if (reviews.length === 0) {
+  reviews = [
+    {
+      name: "Sarah Johnson",
+      business: "Sarah's Beauty Salon",
+      rating: 5,
+      text: "CallZap saved my salon! I was losing clients every week to missed calls. Now they all get instant texts and book automatically!",
+      date: "July 2026"
+    },
+    {
+      name: "Mike Rodriguez",
+      business: "Mike's Plumbing",
+      rating: 5,
+      text: "I can't answer calls while working. CallZap texts them back instantly. My revenue went up 40% in one month!",
+      date: "July 2026"
+    },
+    {
+      name: "Lisa Chen",
+      business: "Smile Dental Clinic",
+      rating: 5,
+      text: "Best $99 I spend every month. The AI chatbot books appointments while I sleep!",
+      date: "June 2026"
+    }
+  ];
+  localStorage.setItem('callzap_reviews', JSON.stringify(reviews));
+}
+
+function setRating(rating) {
+  selectedRating = rating;
+  document.querySelectorAll('.star-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i < rating);
+  });
+}
+
+function submitReview() {
+  const name = document.getElementById('reviewName').value.trim();
+  const business = document.getElementById('reviewBusiness').value.trim();
+  const text = document.getElementById('reviewText').value.trim();
+
+  if (!name || !business || !text || selectedRating === 0) {
+    alert('Please fill all fields and select a rating!');
+    return;
+  }
+
+  const review = {
+    name, business, text,
+    rating: selectedRating,
+    date: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  };
+
+  reviews.unshift(review);
+  localStorage.setItem('callzap_reviews', JSON.stringify(reviews));
+
+  document.getElementById('reviewName').value = '';
+  document.getElementById('reviewBusiness').value = '';
+  document.getElementById('reviewText').value = '';
+  selectedRating = 0;
+  document.querySelectorAll('.star-btn').forEach(btn => btn.classList.remove('active'));
+
+  renderReviews();
+  alert('Thank you for your review! ⭐');
+}
+
+function renderReviews() {
+  const list = document.getElementById('reviewsList');
+  const empty = document.getElementById('emptyState');
+
+  if (reviews.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+
+  const total = reviews.length;
+  const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / total;
+
+  document.getElementById('avgRating').textContent = avg.toFixed(1);
+  document.getElementById('avgStars').textContent = '★'.repeat(Math.round(avg)) + '☆'.repeat(5 - Math.round(avg));
+  document.getElementById('totalReviews').textContent = total + ' reviews';
+
+  [1,2,3,4,5].forEach(star => {
+    const count = reviews.filter(r => r.rating === star).length;
+    const pct = total > 0 ? (count / total * 100) : 0;
+    document.getElementById('bar' + star).style.width = pct + '%';
+    document.getElementById('count' + star).textContent = count;
+  });
+
+  const cards = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-header">
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">${r.name.charAt(0)}</div>
+          <div>
+            <div class="reviewer-name">${r.name}</div>
+            <div class="reviewer-business">${r.business}</div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+          <div class="review-date">${r.date}</div>
+        </div>
+      </div>
+      <div class="review-text">${r.text}</div>
+      <span class="verified-badge">✅ Verified Customer</span>
+    </div>
+  `).join('');
+
+  list.innerHTML = '<div class="empty-reviews" id="emptyState" style="display:none"></div>' + cards;
+}
+
+renderReviews();
+</script>
+</body>
+</html>
