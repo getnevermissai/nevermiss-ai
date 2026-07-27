@@ -284,13 +284,12 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
     </div>
   </div>
 
-  <div class="section-head">📋 Recent Activity</div>
-  <div class="activity-box">
-    <div class="empty">
-      <div class="empty-icon">📭</div>
-      <p>No activity yet!</p>
-      <small style="display:block;margin-top:8px;font-size:13px">Connect your phone number to start recovering missed calls.</small>
-    </div>
+  <div class="section-head">🔥 Hot Leads</div>
+<div class="activity-box" id="leadsContainer">
+  <div class="empty">
+    <div class="empty-icon">📭</div>
+    <p>No leads yet!</p>
+    <small style="display:block;margin-top:8px;font-size:13px">Connect your phone number to start getting leads!</small>
   </div>
 </div>
 
@@ -375,6 +374,33 @@ function generatePromo() {
   document.getElementById('promoBizDisplay').textContent = biz;
   card.classList.add('show');
 }
+  async function loadLeads() {
+  try {
+    const response = await fetch('https://callzap-backend.onrender.com/leads');
+    const leads = await response.json();
+    if (leads.length === 0) return;
+    const container = document.getElementById('leadsContainer');
+    container.innerHTML = leads.map(lead => `
+      <div style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:16px;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-weight:700;font-size:16px;">${lead.name || 'Unknown'} 👤</div>
+            <div style="color:#555;font-size:13px;">${lead.service || 'Not specified'}</div>
+            <div style="color:#555;font-size:13px;">📅 ${lead.appointment || 'Not set'}</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:24px;font-weight:900;color:#00c853;">${lead.score || 0}</div>
+            <div style="padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;background:${lead.status === 'HOT' ? '#ff4444' : '#ffaa00'};color:white;">${lead.status || 'NEW'}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    console.log('Could not load leads');
+  }
+}
+loadLeads();
+setInterval(loadLeads, 30000);
 </script>
 </body>
 </html>
