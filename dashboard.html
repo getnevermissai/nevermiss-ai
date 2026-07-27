@@ -387,6 +387,8 @@ function generatePromo() {
             <div style="font-weight:700;font-size:16px;">${lead.name || 'Unknown'} 👤</div>
             <div style="color:#555;font-size:13px;">${lead.service || 'Not specified'}</div>
             <div style="color:#555;font-size:13px;">📅 ${lead.appointment || 'Not set'}</div>
+            <div style="color:#555;font-size:13px;margin-top:8px;">📝 ${lead.conversationSummary || ''}</div>
+<div style="color:#00c853;font-size:12px;margin-top:4px;">➡️ ${lead.nextAction || ''}</div>
           </div>
           <div style="text-align:right;">
             <div style="font-size:24px;font-weight:900;color:#00c853;">${lead.score || 0}</div>
