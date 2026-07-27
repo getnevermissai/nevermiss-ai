@@ -256,7 +256,7 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
       <div class="fcard-title">Missed Call Text Back</div>
       <span class="badge badge-green">Setup Required</span>
       <div class="fcard-desc">Automatically sends a text to every missed caller instantly — so you never lose a client!</div>
-      <button class="fcard-btn btn-g" onclick="alert('Connect your phone number! Coming soon.')">Connect Phone Number →</button>
+      <button class="fcard-btn btn-g" onclick="openTwilioSetup()">Connect Phone Number →</button>
     </div>
 
     <div class="fcard">
@@ -401,6 +401,50 @@ function generatePromo() {
 }
 loadLeads();
 setInterval(loadLeads, 30000);
+</script>
+    <!-- TWILIO SETUP MODAL -->
+<div class="overlay" id="twilioOverlay">
+  <div class="modal">
+    <h3>📞 Connect Your Twilio Account</h3>
+    <p style="color:#555;font-size:13px;margin-bottom:20px;">Enter your Twilio credentials to start receiving missed call alerts!</p>
+    <input class="minput" id="twilioSid" placeholder="Account SID (starts with AC...)">
+    <input class="minput" id="twilioToken" placeholder="Auth Token">
+    <input class="minput" id="twilioPhone" placeholder="Twilio Phone Number (+1xxxxxxxxxx)">
+    <div class="mbtns">
+      <button class="mbtn-cancel" onclick="closeTwilioSetup()">Cancel</button>
+      <button class="mbtn-gen" onclick="saveTwilioCredentials()">Save & Connect ⚡</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openTwilioSetup() {
+  document.getElementById('twilioOverlay').classList.add('show');
+}
+
+function closeTwilioSetup() {
+  document.getElementById('twilioOverlay').classList.remove('show');
+}
+
+function saveTwilioCredentials() {
+  const sid = document.getElementById('twilioSid').value.trim();
+  const token = document.getElementById('twilioToken').value.trim();
+  const phone = document.getElementById('twilioPhone').value.trim();
+  
+  if (!sid || !token || !phone) {
+    alert('Please fill all fields!');
+    return;
+  }
+  
+  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  user.twilioSid = sid;
+  user.twilioToken = token;
+  user.twilioPhone = phone;
+  localStorage.setItem('currentUser', JSON.stringify(user));
+  
+  alert('✅ Twilio connected successfully!');
+  closeTwilioSetup();
+}
 </script>
 </body>
 </html>
