@@ -278,13 +278,26 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
     </div>
   </div>
 
-  <div class="section-head">🔥 Hot Leads</div>
-<div class="activity-box" id="leadsContainer">
-  <div class="empty">
-    <div class="empty-icon">📭</div>
-    <p>No leads yet!</p>
-    <small style="display:block;margin-top:8px;font-size:13px">Connect your phone number to start getting leads!</small>
-  </div>
+<div class="section-head">🔥 Hot Leads</div>
+
+<!-- FILTER BUTTONS -->
+<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+  <button onclick="filterLeads('ALL')" id="filter-ALL"
+    style="padding:8px 20px;border-radius:20px;border:none;background:#00c853;color:#000;font-weight:700;cursor:pointer;">
+    All Leads
+  </button>
+  <button onclick="filterLeads('HOT')" id="filter-HOT"
+    style="padding:8px 20px;border-radius:20px;border:1px solid #ff4444;background:transparent;color:#ff4444;font-weight:700;cursor:pointer;">
+    🔥 HOT
+  </button>
+  <button onclick="filterLeads('WARM')" id="filter-WARM"
+    style="padding:8px 20px;border-radius:20px;border:1px solid #ffaa00;background:transparent;color:#ffaa00;font-weight:700;cursor:pointer;">
+    🟡 WARM
+  </button>
+  <button onclick="filterLeads('COLD')" id="filter-COLD"
+    style="padding:8px 20px;border-radius:20px;border:1px solid #4499ff;background:transparent;color:#4499ff;font-weight:700;cursor:pointer;">
+    🧊 COLD
+  </button>
 </div>
 
 <!-- PROMO MODAL -->
@@ -368,35 +381,75 @@ function generatePromo() {
   document.getElementById('promoBizDisplay').textContent = biz;
   card.classList.add('show');
 }
-  async function loadLeads() {
+  let allLeads = [];
+
+async function loadLeads() {
   try {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const businessId = user.twilioPhone || 'default';
-    const response = await fetch(`https://callzap-backend.onrender.com/leads/${businessId}`);
-    const leads = await response.json();
-    if (leads.length === 0) return;
-    const container = document.getElementById('leadsContainer');
-    container.innerHTML = leads.map(lead => `
-      <div style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:16px;margin-bottom:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-weight:700;font-size:16px;">${lead.name || 'Unknown'} 👤</div>
-            <div style="color:#555;font-size:13px;">${lead.service || 'Not specified'}</div>
-            <div style="color:#555;font-size:13px;">📅 ${lead.appointment || 'Not set'}</div>
-            <div style="color:#555;font-size:13px;margin-top:8px;">📝 ${lead.conversationSummary || ''}</div>
-<div style="color:#00c853;font-size:12px;margin-top:4px;">➡️ ${lead.nextAction || ''}</div>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:24px;font-weight:900;color:#00c853;">${lead.score || 0}</div>
-            <div style="padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;background:${lead.status === 'HOT' ? '#ff4444' : '#ffaa00'};color:white;">${lead.status || 'NEW'}</div>
-          </div>
-        </div>
-      </div>
-    `).join('');
+    const response = await fetch(`https://callzap-backend.onrender.com/leads/${businessId}`, {
+      headers: {
+        'x-business-token': businessId
+      }
+    });
+    allLeads = await response.json();
+    renderLeads(allLeads);
   } catch(e) {
     console.log('Could not load leads');
   }
 }
+
+function filterLeads(status) {
+  // Update button styles
+  ['ALL', 'HOT', 'WARM', 'COLD'].forEach(s => {
+    const btn = document.getElementById('filter-' + s);
+    if (s === status) {
+      btn.style.background = s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853';
+      btn.style.color = '#000';
+    } else {
+      btn.style.background = 'transparent';
+      btn.style.color = s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853';
+    }
+  });
+
+  // Filter leads
+  const filtered = status === 'ALL' ? allLeads : allLeads.filter(l => l.status === status);
+  renderLeads(filtered);
+}
+
+function renderLeads(leads) {
+  const container = document.getElementById('leadsContainer');
+  
+  if (!leads || leads.length === 0) {
+    container.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📭</div>
+        <p>No leads found!</p>
+        <small style="display:block;margin-top:8px;font-size:13px">Connect your phone number to start getting leads!</small>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = leads.map(lead => `
+    <div style="background:#1a1a1a;border:1px solid ${lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#4499ff'};border-radius:12px;padding:16px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-weight:700;font-size:16px;">${lead.name || 'Unknown'} 👤</div>
+          <div style="color:#555;font-size:13px;">🔧 ${lead.service || 'Not specified'}</div>
+          <div style="color:#555;font-size:13px;">📅 ${lead.appointment || 'Not set'}</div>
+          <div style="color:#555;font-size:13px;">📝 ${lead.conversationSummary || ''}</div>
+          <div style="color:#00c853;font-size:12px;margin-top:4px;">➡️ ${lead.nextAction || ''}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:28px;font-weight:900;color:${lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#4499ff'}">${lead.score || 0}</div>
+          <div style="padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;background:${lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#333'};color:white;">${lead.status === 'HOT' ? '🔥 HOT' : lead.status === 'WARM' ? '🟡 WARM' : '🧊 COLD'}</div>
+          <div style="color:#444;font-size:11px;margin-top:4px;">${lead.isReturning ? '🔄 Returning' : '🆕 New'}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
 loadLeads();
 setInterval(loadLeads, 30000);
 </script>
