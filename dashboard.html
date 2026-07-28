@@ -220,7 +220,61 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
 <div class="page">
   <div class="welcome-title">Welcome back, <span id="bizName">Business</span>! 👋</div>
   <div class="welcome-sub">Your AI-powered missed call recovery system ⚡</div>
+<!-- BUSINESS CONFIG FORM -->
+<div style="background:#111;border:1px solid #1a3a2a;border-radius:16px;padding:24px;margin-bottom:24px;">
+  <h3 style="color:#00c853;font-size:18px;font-weight:800;margin-bottom:6px;">⚙️ Business Setup</h3>
+  <p style="color:#555;font-size:13px;margin-bottom:20px;">Configure your AI assistant for your business!</p>
+  
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div>
+      <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Business Name</label>
+      <input id="configBizName" placeholder="e.g. Sarah's Salon"
+        style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+    </div>
+    <div>
+      <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Working Hours</label>
+      <input id="configHours" placeholder="e.g. 9 AM - 6 PM"
+        style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+    </div>
+  </div>
 
+  <div style="margin-bottom:16px;">
+    <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Services (comma separated)</label>
+    <input id="configServices" placeholder="e.g. Haircut, Color, Spa, Nails"
+      style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+  </div>
+
+  <div style="margin-bottom:16px;">
+    <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Custom AI Greeting</label>
+    <input id="configGreeting" placeholder="e.g. Hi! Sorry we missed your call at Sarah's Salon!"
+      style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+    <div>
+      <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Twilio Account SID</label>
+      <input id="configSid" placeholder="AC..."
+        style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+    </div>
+    <div>
+      <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Twilio Auth Token</label>
+      <input id="configToken" type="password" placeholder="••••••••"
+        style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;">
+    <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Twilio Phone Number</label>
+    <input id="configPhone" placeholder="+1256xxxxxxx"
+      style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
+  </div>
+
+  <button onclick="saveBusinessConfig()"
+    style="background:#00c853;color:#000;border:none;padding:12px 28px;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;">
+    Save Configuration ⚡
+  </button>
+  <span id="configSaved" style="display:none;color:#00c853;margin-left:12px;font-size:14px;">✅ Saved!</span>
+</div>
   <div class="trial-bar">
     <div class="trial-info">
       <h3>⚡ 7-Day Free Trial Active</h3>
@@ -334,7 +388,45 @@ if (user) {
   document.getElementById('bizName').textContent = 'Business';
   document.getElementById('userBadge').textContent = 'Guest';
 }
+function saveBusinessConfig() {
+  const config = {
+    bizName: document.getElementById('configBizName').value,
+    hours: document.getElementById('configHours').value,
+    services: document.getElementById('configServices').value,
+    greeting: document.getElementById('configGreeting').value,
+    twilioSid: document.getElementById('configSid').value,
+    twilioToken: document.getElementById('configToken').value,
+    twilioPhone: document.getElementById('configPhone').value
+  };
 
+  if (!config.bizName || !config.twilioSid || !config.twilioPhone) {
+    alert('Please fill Business Name and Twilio details!');
+    return;
+  }
+
+  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  user.businessConfig = config;
+  localStorage.setItem('currentUser', JSON.stringify(user));
+
+  document.getElementById('configSaved').style.display = 'inline';
+  setTimeout(() => {
+    document.getElementById('configSaved').style.display = 'none';
+  }, 3000);
+}
+
+// Load saved config on page load
+window.addEventListener('load', function() {
+  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  if (user.businessConfig) {
+    const c = user.businessConfig;
+    document.getElementById('configBizName').value = c.bizName || '';
+    document.getElementById('configHours').value = c.hours || '';
+    document.getElementById('configServices').value = c.services || '';
+    document.getElementById('configGreeting').value = c.greeting || '';
+    document.getElementById('configSid').value = c.twilioSid || '';
+    document.getElementById('configPhone').value = c.twilioPhone || '';
+  }
+});
 function logout() {
   localStorage.removeItem('currentUser');
   window.location.href = 'index.html';
