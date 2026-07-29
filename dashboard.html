@@ -531,7 +531,7 @@ async function loadLeads() {
   try {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const businessId = user.twilioPhone || 'default';
-    const response = await fetch('https://callzap-backend.onrender.com/api/business/config', {
+    const response = await fetch(`https://callzap-backend.onrender.com/leads/${businessId}`,
       headers: {
         'x-business-token': businessId
       }
