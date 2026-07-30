@@ -1,4 +1,4 @@
-*-<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,204 +8,192 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #0a0a0a; color: white; font-family: sans-serif; }
 .navbar {
-  background: #111;
-  padding: 16px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: #111; padding: 16px 24px;
+  display: flex; justify-content: space-between; align-items: center;
   border-bottom: 1px solid #1a3a2a;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  position: sticky; top: 0; z-index: 100;
 }
 .logo { color: #00c853; font-size: 22px; font-weight: 800; }
 .nav-right { display: flex; align-items: center; gap: 16px; }
 .user-badge {
-  background: #1a3a2a;
-  color: #00c853;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
+  background: #1a3a2a; color: #00c853;
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 13px; font-weight: 600;
 }
 .logout-btn {
-  background: transparent;
-  border: 1px solid #333;
-  color: #999;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
+  background: transparent; border: 1px solid #333;
+  color: #999; padding: 8px 16px; border-radius: 8px; cursor: pointer;
 }
-.logout-btn:hover { border-color: #ff4444; color: #ff4444; }
-.page { padding: 32px 24px; max-width: 1100px; margin: 0 auto; }
-.welcome-title { font-size: 30px; font-weight: 800; margin-bottom: 6px; }
-.welcome-title span { color: #00c853; }
-.welcome-sub { color: #666; margin-bottom: 28px; font-size: 15px; }
+.page { padding: 24px; max-width: 1100px; margin: 0 auto; }
+
+/* TRIAL BAR */
 .trial-bar {
   background: linear-gradient(135deg, #0a2a1a, #0d3320);
-  border: 1px solid #00c853;
-  border-radius: 14px;
-  padding: 18px 24px;
-  margin-bottom: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  border: 1px solid #00c853; border-radius: 14px;
+  padding: 18px 24px; margin-bottom: 24px;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
 }
 .trial-info h3 { color: #00c853; font-size: 16px; font-weight: 700; }
 .trial-info p { color: #666; font-size: 13px; margin-top: 4px; }
 .upgrade-btn {
-  background: #00c853;
-  color: #000;
-  border: none;
-  padding: 10px 22px;
-  border-radius: 8px;
-  font-weight: 800;
-  cursor: pointer;
-  font-size: 14px;
+  background: #00c853; color: #000; border: none;
+  padding: 10px 22px; border-radius: 8px;
+  font-weight: 800; cursor: pointer; font-size: 14px;
 }
+
+/* STATS */
 .stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 32px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 14px; margin-bottom: 24px;
 }
 .stat {
-  background: #111;
-  border: 1px solid #1a3a2a;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
+  background: #111; border: 1px solid #1a3a2a;
+  border-radius: 12px; padding: 20px; text-align: center;
 }
 .stat-num { font-size: 34px; font-weight: 800; color: #00c853; }
 .stat-lbl { color: #555; font-size: 12px; margin-top: 6px; text-transform: uppercase; }
+
+/* BUSINESS CONFIG */
+.config-box {
+  background: #111; border: 1px solid #1a3a2a;
+  border-radius: 16px; padding: 24px; margin-bottom: 24px;
+}
+.config-title { color: #00c853; font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+.config-sub { color: #555; font-size: 13px; margin-bottom: 20px; }
+.input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.input-group { margin-bottom: 16px; }
+.input-label { color: #888; font-size: 12px; display: block; margin-bottom: 6px; }
+.config-input {
+  width: 100%; padding: 10px 14px;
+  background: #1a1a1a; border: 1px solid #333;
+  border-radius: 8px; color: white; font-size: 14px; outline: none;
+}
+.config-input:focus { border-color: #00c853; }
+select.config-input { cursor: pointer; }
+
+/* ADVANCED SECTION */
+.advanced-toggle {
+  width: 100%; padding: 12px 16px;
+  background: #1a1a1a; border: 1px solid #222;
+  color: #888; font-size: 14px; cursor: pointer;
+  border-radius: 8px; text-align: left;
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 4px;
+}
+.advanced-toggle:hover { border-color: #00c853; color: white; }
+.advanced-body {
+  background: #1a1a1a; border: 1px solid #222;
+  border-radius: 8px; padding: 16px;
+  margin-bottom: 16px; display: none;
+}
+.helper-text { color: #444; font-size: 12px; margin-bottom: 16px; }
+.helper-text a { color: #00c853; }
+.save-btn {
+  background: #00c853; color: #000; border: none;
+  padding: 12px 28px; border-radius: 8px;
+  font-weight: 800; font-size: 15px; cursor: pointer;
+}
+.saved-msg { display: none; color: #00c853; margin-left: 12px; font-size: 14px; }
+
+/* FEATURES */
 .section-head { font-size: 20px; font-weight: 700; margin-bottom: 18px; }
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-  margin-bottom: 32px;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 18px; margin-bottom: 24px;
 }
 .fcard {
-  background: #111;
-  border: 1px solid #222;
-  border-radius: 16px;
-  padding: 26px;
-  transition: all 0.3s;
+  background: #111; border: 1px solid #222;
+  border-radius: 16px; padding: 26px; transition: all 0.3s;
 }
-.fcard:hover { border-color: #00c853; transform: translateY(-2px); }
+.fcard:hover { border-color: #00c853; }
 .fcard-icon { font-size: 40px; margin-bottom: 14px; }
 .fcard-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
 .fcard-desc { color: #555; font-size: 13px; line-height: 1.6; margin-bottom: 18px; }
 .badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  margin-bottom: 14px;
-  text-transform: uppercase;
+  display: inline-block; padding: 3px 10px;
+  border-radius: 20px; font-size: 11px; font-weight: 700;
+  margin-bottom: 14px; text-transform: uppercase;
 }
 .badge-green { background: #0a2a1a; color: #00c853; border: 1px solid #00c853; }
-.badge-ready { background: #1a2a0a; color: #88ff44; border: 1px solid #88ff44; }
 .fcard-btn {
-  width: 100%;
-  padding: 11px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 14px;
-  border: none;
+  width: 100%; padding: 11px; border-radius: 8px;
+  font-weight: 700; cursor: pointer; font-size: 14px; border: none;
 }
 .btn-g { background: #00c853; color: #000; }
-.btn-g:hover { background: #00a846; }
-.activity-box {
-  background: #111;
-  border: 1px solid #1a1a1a;
-  border-radius: 16px;
-  padding: 28px;
-  margin-bottom: 32px;
-}
-.empty { text-align: center; padding: 40px; color: #444; }
-.empty-icon { font-size: 52px; margin-bottom: 14px; }
 
-/* PROMO MODAL */
+/* LEADS */
+.leads-section { margin-bottom: 24px; }
+.filter-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-btn {
+  padding: 8px 20px; border-radius: 20px;
+  font-weight: 700; cursor: pointer; font-size: 13px;
+  transition: all 0.2s;
+}
+.leads-container { display: flex; flex-direction: column; gap: 12px; }
+.lead-card {
+  background: #1a1a1a; border-radius: 12px;
+  padding: 16px; transition: all 0.2s;
+}
+.lead-card:hover { transform: translateY(-2px); }
+.lead-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.lead-name { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+.lead-detail { color: #555; font-size: 13px; margin-bottom: 2px; }
+.lead-summary { color: #555; font-size: 13px; margin-top: 8px; }
+.lead-action { color: #00c853; font-size: 12px; margin-top: 4px; }
+.lead-score { font-size: 28px; font-weight: 900; text-align: right; }
+.lead-badge {
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 12px; font-weight: 700; color: white;
+  display: inline-block; margin-top: 4px;
+}
+.returning-badge {
+  color: #444; font-size: 11px; margin-top: 4px;
+}
+.empty-state {
+  text-align: center; padding: 48px; color: #444;
+  background: #111; border: 1px dashed #333; border-radius: 14px;
+}
+.empty-icon { font-size: 48px; margin-bottom: 16px; }
+
+/* TWILIO MODAL */
 .overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  z-index: 999;
-  align-items: center;
-  justify-content: center;
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85); z-index: 999;
+  align-items: center; justify-content: center;
 }
 .overlay.show { display: flex; }
 .modal {
-  background: #111;
-  border: 1px solid #1a3a2a;
-  border-radius: 18px;
-  padding: 32px;
-  width: 92%;
-  max-width: 480px;
+  background: #111; border: 1px solid #1a3a2a;
+  border-radius: 18px; padding: 32px;
+  width: 92%; max-width: 480px;
 }
 .modal h3 { font-size: 22px; font-weight: 800; margin-bottom: 22px; }
 .minput {
-  width: 100%;
-  padding: 13px 16px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 9px;
-  color: white;
-  font-size: 15px;
-  margin-bottom: 14px;
-  outline: none;
+  width: 100%; padding: 13px 16px;
+  background: #1a1a1a; border: 1px solid #333;
+  border-radius: 9px; color: white; font-size: 15px;
+  margin-bottom: 14px; outline: none;
 }
 .minput:focus { border-color: #00c853; }
-.mselect {
-  width: 100%;
-  padding: 13px 16px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 9px;
-  color: white;
-  font-size: 15px;
-  margin-bottom: 14px;
-  outline: none;
-}
-.promo-card {
-  display: none;
-  border-radius: 14px;
-  padding: 28px;
-  text-align: center;
-  margin: 18px 0;
-}
-.promo-card.show { display: block; }
-.promo-offer-text { font-size: 38px; font-weight: 900; }
-.promo-biz { font-size: 17px; margin-top: 8px; opacity: 0.9; }
-.promo-footer { font-size: 12px; margin-top: 10px; opacity: 0.6; }
 .mbtns { display: flex; gap: 10px; margin-top: 6px; }
 .mbtn-cancel {
-  padding: 11px 18px;
-  background: transparent;
-  border: 1px solid #333;
-  color: #888;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 11px 18px; background: transparent;
+  border: 1px solid #333; color: #888;
+  border-radius: 8px; cursor: pointer;
 }
 .mbtn-gen {
-  flex: 1;
-  padding: 11px;
-  background: #00c853;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  font-weight: 800;
-  cursor: pointer;
+  flex: 1; padding: 11px; background: #00c853;
+  color: #000; border: none; border-radius: 8px;
+  font-weight: 800; cursor: pointer;
+}
+
+@media(max-width:700px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .features-grid { grid-template-columns: 1fr; }
+  .input-grid { grid-template-columns: 1fr; }
 }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -218,393 +206,175 @@ body { background: #0a0a0a; color: white; font-family: sans-serif; }
 </nav>
 
 <div class="page">
-  <div class="welcome-title">Welcome back, <span id="bizName">Business</span>! 👋</div>
-  <div class="welcome-sub">Your AI-powered missed call recovery system ⚡</div>
-<!-- BUSINESS CONFIG FORM -->
-<div style="background:#111;border:1px solid #1a3a2a;border-radius:16px;padding:24px;margin-bottom:24px;">
-  <h3 style="color:#00c853;font-size:18px;font-weight:800;margin-bottom:6px;">⚙️ Business Setup</h3>
-  <p style="color:#555;font-size:13px;margin-bottom:20px;">Configure your AI assistant for your business!</p>
 
-  <!-- SIMPLE SECTION -->
-  <div style="margin-bottom:16px;">
-    <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Business Name</label>
-    <input id="configBizName" placeholder="e.g. Sarah's Beauty Salon"
-      style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-  </div>
-
-  <div style="margin-bottom:16px;">
-    <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Services (comma separated)</label>
-    <input id="configServices" placeholder="e.g. Haircut, Color, Spa, Nails"
-      style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-  </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-    <div>
-      <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Working Hours</label>
-      <input id="configHours" placeholder="e.g. 9 AM - 6 PM"
-        style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-    </div>
-    <div>
-      <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Timezone</label>
-      <select id="configTimezone"
-        style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-        <option value="EST">Eastern Time (EST)</option>
-        <option value="CST">Central Time (CST)</option>
-        <option value="MST">Mountain Time (MST)</option>
-        <option value="PST">Pacific Time (PST)</option>
-        <option value="GMT">UK Time (GMT)</option>
-        <option value="AEST">Australia (AEST)</option>
-      </select>
-    </div>
-  </div>
-  <div style="margin-bottom:16px;">
-  <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Custom AI Greeting</label>
-  <input id="configGreeting" placeholder="e.g. Hi! Sorry we missed your call!"
-    style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-</div>
-
-  <div style="margin-bottom:20px;">
-    <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">📅 Calendar Booking Link</label>
-    <input id="configCalendar" placeholder="e.g. https://calendly.com/yourbusiness"
-      style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-    <small style="color:#444;font-size:11px;">Works with Calendly, Acuity, Google Calendar!</small>
-  </div>
-
-  <!-- ADVANCED SECTION -->
-  <div style="border:1px solid #222;border-radius:10px;overflow:hidden;margin-bottom:20px;">
-    <button onclick="toggleAdvanced()"
-      style="width:100%;padding:12px 16px;background:#1a1a1a;border:none;color:#888;font-size:14px;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;">
-      <span>🔧 Advanced Integration Settings (Twilio)</span>
-      <span id="advancedArrow">▼</span>
-    </button>
-    
-    <div id="advancedSection" style="display:none;padding:16px;background:#111;">
-      <p style="color:#555;font-size:12px;margin-bottom:16px;">
-        Connect your Twilio account to enable missed call detection.
-        <a href="https://console.twilio.com" target="_blank" style="color:#00c853;">Need help? Click here →</a>
-      </p>
-      
-      <div style="margin-bottom:12px;">
-        <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Twilio Account SID</label>
-        <input id="configSid" placeholder="Starts with AC..."
-          style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-      </div>
-
-      <div style="margin-bottom:12px;">
-        <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Twilio Auth Token</label>
-        <input id="configToken" type="password" placeholder="••••••••"
-          style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-      </div>
-
-      <div style="margin-bottom:4px;">
-        <label style="color:#888;font-size:12px;display:block;margin-bottom:6px;">Twilio Phone Number</label>
-        <input id="configPhone" placeholder="+1256xxxxxxx"
-          style="width:100%;padding:10px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:white;outline:none;font-size:14px;">
-      </div>
-    </div>
-  </div>
-
-  <button onclick="saveBusinessConfig()"
-    style="background:#00c853;color:#000;border:none;padding:12px 28px;border-radius:8px;font-weight:800;font-size:15px;cursor:pointer;">
-    Save Configuration ⚡
-  </button>
-  <span id="configSaved" style="display:none;color:#00c853;margin-left:12px;font-size:14px;">✅ Saved!</span>
-</div>
-</div>
+  <!-- TRIAL BAR -->
   <div class="trial-bar">
     <div class="trial-info">
       <h3>⚡ 7-Day Free Trial Active</h3>
       <p>Upgrade anytime to keep recovering missed clients!</p>
     </div>
-    <button class="upgrade-btn" onclick="alert('Payment system coming soon!')">Upgrade to Pro — $99/mo 🚀</button>
+    <button class="upgrade-btn" onclick="window.location.href='index.html#pricing'">
+      Upgrade to Pro — $99/mo 🚀
+    </button>
   </div>
 
+  <!-- STATS -->
   <div class="stats-row">
     <div class="stat">
-      <div class="stat-num">0</div>
-      <div class="stat-lbl">📞 Missed Calls</div>
+      <div class="stat-num" id="totalLeads">0</div>
+      <div class="stat-lbl">📞 Total Leads</div>
     </div>
     <div class="stat">
-      <div class="stat-num">0</div>
-      <div class="stat-lbl">💬 Texts Sent</div>
+      <div class="stat-num" id="hotLeads">0</div>
+      <div class="stat-lbl">🔥 Hot Leads</div>
     </div>
     <div class="stat">
-      <div class="stat-num">0</div>
-      <div class="stat-lbl">📅 Bookings</div>
+      <div class="stat-num" id="warmLeads">0</div>
+      <div class="stat-lbl">🟡 Warm Leads</div>
     </div>
     <div class="stat">
-      <div class="stat-num">0</div>
-      <div class="stat-lbl">💰 Recovered</div>
+      <div class="stat-num" id="coldLeads">0</div>
+      <div class="stat-lbl">🧊 Cold Leads</div>
     </div>
   </div>
 
-  <div class="section-head">⚡ Your Features</div>
+  <!-- BUSINESS CONFIG -->
+  <div class="config-box">
+    <div class="config-title">⚙️ Business Setup</div>
+    <div class="config-sub">Configure your AI assistant for your business!</div>
 
-  <div class="features-grid">
-    
-
-    <div class="fcard">
-      <div class="fcard-icon">🤖</div>
-      <div class="fcard-title">AI Chatbot</div>
-      <span class="badge badge-green">Setup Required</span>
-      <div class="fcard-desc">AI answers customer questions 24/7 and books appointments automatically!</div>
-      <button class="fcard-btn btn-g" onclick="alert('AI Chatbot coming soon!')">Setup AI Chatbot →</button>
+    <div class="input-grid">
+      <div>
+        <label class="input-label">Business Name</label>
+        <input class="config-input" id="configBizName" placeholder="e.g. Sarah's Beauty Salon">
+      </div>
+      <div>
+        <label class="input-label">Working Hours</label>
+        <input class="config-input" id="configHours" placeholder="e.g. 9 AM - 6 PM">
+      </div>
     </div>
 
+    <div class="input-group">
+      <label class="input-label">Services (comma separated)</label>
+      <input class="config-input" id="configServices" placeholder="e.g. Haircut, Color, Spa, Nails">
+    </div>
+
+    <div class="input-grid">
+      <div>
+        <label class="input-label">Timezone</label>
+        <select class="config-input" id="configTimezone">
+          <option value="EST">Eastern Time (EST)</option>
+          <option value="CST">Central Time (CST)</option>
+          <option value="MST">Mountain Time (MST)</option>
+          <option value="PST">Pacific Time (PST)</option>
+          <option value="GMT">UK Time (GMT)</option>
+          <option value="AEST">Australia (AEST)</option>
+        </select>
+      </div>
+      <div>
+        <label class="input-label">📅 Calendar Booking Link</label>
+        <input class="config-input" id="configCalendar" placeholder="https://calendly.com/yourbusiness">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label class="input-label">Custom AI Greeting</label>
+      <input class="config-input" id="configGreeting" placeholder="e.g. Hi! Sorry we missed your call at Sarah's Salon!">
+    </div>
+
+    <!-- ADVANCED -->
+    <button class="advanced-toggle" onclick="toggleAdvanced()">
+      <span>🔧 Advanced Integration Settings (Twilio)</span>
+      <span id="advancedArrow">▼</span>
+    </button>
+    <div class="advanced-body" id="advancedSection">
+      <p class="helper-text">
+        Connect your Twilio account to enable missed call detection.
+        <a href="https://console.twilio.com" target="_blank">Need help? Click here →</a>
+      </p>
+      <div class="input-group">
+        <label class="input-label">Twilio Account SID</label>
+        <input class="config-input" id="configSid" placeholder="Starts with AC...">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Twilio Auth Token</label>
+        <input class="config-input" id="configToken" type="password" placeholder="••••••••">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Twilio Phone Number</label>
+        <input class="config-input" id="configPhone" placeholder="+1256xxxxxxx">
+      </div>
+    </div>
+
+    <button class="save-btn" onclick="saveBusinessConfig()">Save Configuration ⚡</button>
+    <span class="saved-msg" id="configSaved">✅ Saved!</span>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="section-head">⚡ Your Features</div>
+  <div class="features-grid">
+    <div class="fcard">
+      <div class="fcard-icon">📞</div>
+      <div class="fcard-title">Missed Call Text Back</div>
+      <span class="badge badge-green">AI Powered</span>
+      <div class="fcard-desc">Automatically texts every missed caller within 5-10 seconds. AI qualifies leads automatically!</div>
+      <button class="fcard-btn btn-g" onclick="openTwilioSetup()">Connect Phone Number →</button>
+    </div>
+    <div class="fcard">
+      <div class="fcard-icon">🤖</div>
+      <div class="fcard-title">AI Lead Qualification</div>
+      <span class="badge badge-green">Active</span>
+      <div class="fcard-desc">AI asks 1 question at a time, qualifies leads and scores them HOT/WARM/COLD automatically!</div>
+      <button class="fcard-btn btn-g" onclick="alert('AI is active! Configure business settings above.')">View AI Settings →</button>
+    </div>
     <div class="fcard">
       <div class="fcard-icon">📅</div>
       <div class="fcard-title">Appointment Booking</div>
-      <span class="badge badge-green">Setup Required</span>
-      <div class="fcard-desc">Let customers book appointments 24/7 through SMS automatically!</div>
-      <button class="fcard-btn btn-g" onclick="alert('Booking system coming soon!')">Setup Booking →</button>
+      <span class="badge badge-green">Active</span>
+      <div class="fcard-desc">AI books appointments automatically via SMS. Calendar link shared with customers!</div>
+      <button class="fcard-btn btn-g" onclick="window.open('https://calendly.com', '_blank')">Setup Calendar →</button>
     </div>
-
     <div class="fcard">
-      <div class="fcard-icon">🎨</div>
-      <div class="fcard-title">Promo Creator</div>
-      <span class="badge badge-ready">✅ Ready!</span>
-      <div class="fcard-desc">Create stunning promotional offers instantly for Instagram and Facebook!</div>
-      <button class="fcard-btn btn-g"onclick="window.location.href='promo.html'">Create Promo Now →</button>
+      <div class="fcard-icon">🔥</div>
+      <div class="fcard-title">Lead Scoring</div>
+      <span class="badge badge-green">Active</span>
+      <div class="fcard-desc">AI automatically scores every lead 1-100 and tags as HOT/WARM/COLD so you know who to call first!</div>
+      <button class="fcard-btn btn-g" onclick="filterLeads('HOT')">View HOT Leads →</button>
     </div>
   </div>
 
-<div class="section-head">🔥 Hot Leads</div>
-
-<!-- FILTER BUTTONS -->
-<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
-  <button onclick="filterLeads('ALL')" id="filter-ALL"
-    style="padding:8px 20px;border-radius:20px;border:none;background:#00c853;color:#000;font-weight:700;cursor:pointer;">
-    All Leads
-  </button>
-  <button onclick="filterLeads('HOT')" id="filter-HOT"
-    style="padding:8px 20px;border-radius:20px;border:1px solid #ff4444;background:transparent;color:#ff4444;font-weight:700;cursor:pointer;">
-    🔥 HOT
-  </button>
-  <button onclick="filterLeads('WARM')" id="filter-WARM"
-    style="padding:8px 20px;border-radius:20px;border:1px solid #ffaa00;background:transparent;color:#ffaa00;font-weight:700;cursor:pointer;">
-    🟡 WARM
-  </button>
-  <button onclick="filterLeads('COLD')" id="filter-COLD"
-    style="padding:8px 20px;border-radius:20px;border:1px solid #4499ff;background:transparent;color:#4499ff;font-weight:700;cursor:pointer;">
-    🧊 COLD
-  </button>
-</div>
-
-<!-- PROMO MODAL -->
-<div class="overlay" id="promoOverlay">
-  <div class="modal">
-    <h3>🎨 Create Promo Offer</h3>
-    <input class="minput" id="promoText" placeholder="e.g. 50% OFF Today Only!">
-    <input class="minput" id="promoBiz" placeholder="Your Business Name">
-    <select class="mselect" id="promoColor">
-      <option value="linear-gradient(135deg,#0a2a1a,#1a4a2a)" data-text="#00c853">🟢 Green Theme</option>
-      <option value="linear-gradient(135deg,#1a0a2a,#2a1a4a)" data-text="#aa66ff">🟣 Purple Theme</option>
-      <option value="linear-gradient(135deg,#2a0a0a,#4a1a1a)" data-text="#ff4444">🔴 Red Theme</option>
-      <option value="linear-gradient(135deg,#1a1a0a,#3a2a0a)" data-text="#ffaa00">🟡 Gold Theme</option>
-    </select>
-    <div class="promo-card" id="promoCard">
-      <div class="promo-offer-text" id="promoOfferDisplay"></div>
-      <div class="promo-biz" id="promoBizDisplay"></div>
-      <div class="promo-footer">Valid Today Only • Book Now! 📞</div>
+  <!-- LEADS -->
+  <div class="leads-section">
+    <div class="section-head">🔥 Lead Dashboard</div>
+    <div class="filter-row">
+      <button class="filter-btn" id="filter-ALL" onclick="filterLeads('ALL')"
+        style="background:#00c853;color:#000;border:none;">All Leads</button>
+      <button class="filter-btn" id="filter-HOT" onclick="filterLeads('HOT')"
+        style="background:transparent;color:#ff4444;border:1px solid #ff4444;">🔥 HOT</button>
+      <button class="filter-btn" id="filter-WARM" onclick="filterLeads('WARM')"
+        style="background:transparent;color:#ffaa00;border:1px solid #ffaa00;">🟡 WARM</button>
+      <button class="filter-btn" id="filter-COLD" onclick="filterLeads('COLD')"
+        style="background:transparent;color:#4499ff;border:1px solid #4499ff;">🧊 COLD</button>
     </div>
-    <div class="mbtns">
-      <button class="mbtn-cancel" onclick="closePromo()">Cancel</button>
-      <button class="mbtn-gen" onclick="generatePromo()">✨ Generate!</button>
-<button class="mbtn-gen" style="background:#111;border:1px solid #00c853;color:#00c853;margin-top:10px;" onclick="downloadPromo()">⬇️ Download Promo!</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
-if (user) {
-  document.getElementById('bizName').textContent = user.business || 'Business';
-  document.getElementById('userBadge').textContent = user.business || user.email;
-} else {
-  document.getElementById('bizName').textContent = 'Business';
-  document.getElementById('userBadge').textContent = 'Guest';
-}
-function saveBusinessConfig() {
-  const config = {
-    bizName: document.getElementById('configBizName').value,
-    hours: document.getElementById('configHours').value,
-    services: document.getElementById('configServices').value,
-    greeting: document.getElementById('configGreeting').value,
-    twilioSid: document.getElementById('configSid').value,
-    twilioToken: document.getElementById('configToken').value,
-    twilioPhone: document.getElementById('configPhone').value
-  };
-
-  if (!config.bizName || !config.twilioSid || !config.twilioPhone) {
-    alert('Please fill Business Name and Twilio details!');
-    return;
-  }
-
-  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  user.businessConfig = config;
-  localStorage.setItem('currentUser', JSON.stringify(user));
-
-  document.getElementById('configSaved').style.display = 'inline';
-  setTimeout(() => {
-    document.getElementById('configSaved').style.display = 'none';
-  }, 3000);
-}
-
-// Load saved config on page load
-window.addEventListener('load', function() {
-  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  if (user.businessConfig) {
-    const c = user.businessConfig;
-    document.getElementById('configBizName').value = c.bizName || '';
-    document.getElementById('configHours').value = c.hours || '';
-    document.getElementById('configServices').value = c.services || '';
-    document.getElementById('configGreeting').value = c.greeting || '';
-    document.getElementById('configSid').value = c.twilioSid || '';
-    document.getElementById('configPhone').value = c.twilioPhone || '';
-  }
-});
-  function toggleAdvanced() {
-  const section = document.getElementById('advancedSection');
-  const arrow = document.getElementById('advancedArrow');
-  
-  if (!section || !arrow) return;
-
-  const isHidden = window.getComputedStyle(section).display === 'none';
-
-  if (isHidden) {
-    section.style.display = 'block';
-    arrow.textContent = '▲';
-  } else {
-    section.style.display = 'none';
-    arrow.textContent = '▼';
-  }
-}
-function logout() {
-  localStorage.removeItem('currentUser');
-  window.location.href = 'index.html';
-}
-
-function openPromo() {
-  document.getElementById('promoOverlay').classList.add('show');
-}
-
-function closePromo() {
-  document.getElementById('promoOverlay').classList.remove('show');
-  document.getElementById('promoCard').classList.remove('show');
-  document.getElementById('promoText').value = '';
-  document.getElementById('promoBiz').value = '';
-}
-function downloadPromo() {
-  const card = document.getElementById('promoCard');
-  if (!card.classList.contains('show')) {
-    alert('Generate promo first!');
-    return;
-  }
-  html2canvas(card).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'callzap-promo.png';
-    link.href = canvas.toDataURL();
-    link.click();
-  });
-}
-
-function generatePromo() {
-  const text = document.getElementById('promoText').value.trim();
-  const biz = document.getElementById('promoBiz').value.trim();
-  const select = document.getElementById('promoColor');
-  const bg = select.value;
-  const color = select.options[select.selectedIndex].getAttribute('data-text');
-  if (!text || !biz) {
-    alert('Please fill in both fields!');
-    return;
-  }
-  const card = document.getElementById('promoCard');
-  card.style.background = bg;
-  document.getElementById('promoOfferDisplay').style.color = color;
-  document.getElementById('promoOfferDisplay').textContent = text;
-  document.getElementById('promoBizDisplay').textContent = biz;
-  card.classList.add('show');
-}
-  let allLeads = [];
-
-async function loadLeads() {
-  try {
-    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    const businessId = user.twilioPhone || 'default';
-    const response = await fetch(`https://callzap-backend.onrender.com/leads/${businessId}`,
-      headers: {
-        'x-business-token': businessId
-      }
-    });
-    allLeads = await response.json();
-    renderLeads(allLeads);
-  } catch(e) {
-    console.log('Could not load leads');
-  }
-}
-
-function filterLeads(status) {
-  // Update button styles
-  ['ALL', 'HOT', 'WARM', 'COLD'].forEach(s => {
-    const btn = document.getElementById('filter-' + s);
-    if (s === status) {
-      btn.style.background = s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853';
-      btn.style.color = '#000';
-    } else {
-      btn.style.background = 'transparent';
-      btn.style.color = s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853';
-    }
-  });
-
-  // Filter leads
-  const filtered = status === 'ALL' ? allLeads : allLeads.filter(l => l.status === status);
-  renderLeads(filtered);
-}
-
-function renderLeads(leads) {
-  const container = document.getElementById('leadsContainer');
-  
-  if (!leads || leads.length === 0) {
-    container.innerHTML = `
-      <div class="empty">
+    <div class="leads-container" id="leadsContainer">
+      <div class="empty-state">
         <div class="empty-icon">📭</div>
-        <p>No leads found!</p>
-        <small style="display:block;margin-top:8px;font-size:13px">Connect your phone number to start getting leads!</small>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = leads.map(lead => `
-    <div style="background:#1a1a1a;border:1px solid ${lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#4499ff'};border-radius:12px;padding:16px;margin-bottom:12px;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <div>
-          <div style="font-weight:700;font-size:16px;">${lead.name || 'Unknown'} 👤</div>
-          <div style="color:#555;font-size:13px;">🔧 ${lead.service || 'Not specified'}</div>
-          <div style="color:#555;font-size:13px;">📅 ${lead.appointment || 'Not set'}</div>
-          <div style="color:#555;font-size:13px;">📝 ${lead.conversationSummary || ''}</div>
-          <div style="color:#00c853;font-size:12px;margin-top:4px;">➡️ ${lead.nextAction || ''}</div>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:28px;font-weight:900;color:${lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#4499ff'}">${lead.score || 0}</div>
-          <div style="padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;background:${lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#333'};color:white;">${lead.status === 'HOT' ? '🔥 HOT' : lead.status === 'WARM' ? '🟡 WARM' : '🧊 COLD'}</div>
-          <div style="color:#444;font-size:11px;margin-top:4px;">${lead.isReturning ? '🔄 Returning' : '🆕 New'}</div>
-        </div>
+        <p>No leads yet!</p>
+        <small style="display:block;margin-top:8px;">Connect your Twilio account to start getting leads!</small>
       </div>
     </div>
-  `).join('');
-}
+  </div>
 
-loadLeads();
-setInterval(loadLeads, 30000);
-</script>
-    <!-- TWILIO SETUP MODAL -->
+</div>
+
+<!-- TWILIO MODAL -->
 <div class="overlay" id="twilioOverlay">
   <div class="modal">
-    <h3>📞 Connect Your Twilio Account</h3>
-    <p style="color:#555;font-size:13px;margin-bottom:20px;">Enter your Twilio credentials to start receiving missed call alerts!</p>
-    <input class="minput" id="twilioSid" placeholder="Account SID (starts with AC...)">
+    <h3>📞 Connect Twilio Account</h3>
+    <p style="color:#555;font-size:13px;margin-bottom:20px;">Enter your Twilio credentials to enable missed call detection!</p>
+    <input class="minput" id="twilioSid" placeholder="Account SID (AC...)">
     <input class="minput" id="twilioToken" placeholder="Auth Token">
-    <input class="minput" id="twilioPhone" placeholder="Twilio Phone Number (+1xxxxxxxxxx)">
+    <input class="minput" id="twilioPhone" placeholder="Phone Number (+1xxxxxxxxxx)">
     <div class="mbtns">
       <button class="mbtn-cancel" onclick="closeTwilioSetup()">Cancel</button>
       <button class="mbtn-gen" onclick="saveTwilioCredentials()">Save & Connect ⚡</button>
@@ -613,33 +383,187 @@ setInterval(loadLeads, 30000);
 </div>
 
 <script>
+// ============ USER INIT ============
+const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+if (user) {
+  document.getElementById('userBadge').textContent = user.business || user.email;
+} else {
+  document.getElementById('userBadge').textContent = 'Guest';
+}
+
+// ============ LOGOUT ============
+function logout() {
+  localStorage.removeItem('currentUser');
+  window.location.href = 'index.html';
+}
+
+// ============ TOGGLE ADVANCED ============
+function toggleAdvanced() {
+  const section = document.getElementById('advancedSection');
+  const arrow = document.getElementById('advancedArrow');
+  if (!section || !arrow) return;
+  const isHidden = window.getComputedStyle(section).display === 'none';
+  section.style.display = isHidden ? 'block' : 'none';
+  arrow.textContent = isHidden ? '▲' : '▼';
+}
+
+// ============ SAVE BUSINESS CONFIG ============
+async function saveBusinessConfig() {
+  const bizName = document.getElementById('configBizName')?.value.trim();
+  if (!bizName) {
+    alert('Please enter your Business Name!');
+    return;
+  }
+
+  const config = {
+    bizName: bizName,
+    hours: document.getElementById('configHours')?.value || '',
+    services: document.getElementById('configServices')?.value || '',
+    timezone: document.getElementById('configTimezone')?.value || 'EST',
+    calendar: document.getElementById('configCalendar')?.value || '',
+    greeting: document.getElementById('configGreeting')?.value || '',
+    twilioSid: document.getElementById('configSid')?.value || '',
+    twilioToken: document.getElementById('configToken')?.value || '',
+    twilioPhone: document.getElementById('configPhone')?.value || ''
+  };
+
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  currentUser.businessConfig = config;
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+  try {
+    await fetch('https://callzap-backend.onrender.com/api/business/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(config)
+    });
+  } catch (error) {
+    console.error('Server save failed, using local storage:', error);
+  }
+
+  const saved = document.getElementById('configSaved');
+  saved.style.display = 'inline';
+  setTimeout(() => { saved.style.display = 'none'; }, 3000);
+}
+
+// ============ LOAD SAVED CONFIG ============
+document.addEventListener('DOMContentLoaded', () => {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  if (currentUser.businessConfig) {
+    const c = currentUser.businessConfig;
+    if (document.getElementById('configBizName')) document.getElementById('configBizName').value = c.bizName || '';
+    if (document.getElementById('configHours')) document.getElementById('configHours').value = c.hours || '';
+    if (document.getElementById('configServices')) document.getElementById('configServices').value = c.services || '';
+    if (document.getElementById('configTimezone')) document.getElementById('configTimezone').value = c.timezone || 'EST';
+    if (document.getElementById('configCalendar')) document.getElementById('configCalendar').value = c.calendar || '';
+    if (document.getElementById('configGreeting')) document.getElementById('configGreeting').value = c.greeting || '';
+    if (document.getElementById('configSid')) document.getElementById('configSid').value = c.twilioSid || '';
+    if (document.getElementById('configPhone')) document.getElementById('configPhone').value = c.twilioPhone || '';
+  }
+});
+
+// ============ TWILIO MODAL ============
 function openTwilioSetup() {
   document.getElementById('twilioOverlay').classList.add('show');
 }
-
 function closeTwilioSetup() {
   document.getElementById('twilioOverlay').classList.remove('show');
 }
-
 function saveTwilioCredentials() {
   const sid = document.getElementById('twilioSid').value.trim();
   const token = document.getElementById('twilioToken').value.trim();
   const phone = document.getElementById('twilioPhone').value.trim();
-  
   if (!sid || !token || !phone) {
     alert('Please fill all fields!');
     return;
   }
-  
-  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  user.twilioSid = sid;
-  user.twilioToken = token;
-  user.twilioPhone = phone;
-  localStorage.setItem('currentUser', JSON.stringify(user));
-  
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  currentUser.twilioSid = sid;
+  currentUser.twilioToken = token;
+  currentUser.twilioPhone = phone;
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
   alert('✅ Twilio connected successfully!');
   closeTwilioSetup();
 }
+
+// ============ LEADS ============
+let allLeads = [];
+
+async function loadLeads() {
+  try {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const businessId = currentUser.twilioPhone || currentUser.businessConfig?.twilioPhone || 'default';
+    const response = await fetch(`https://callzap-backend.onrender.com/leads/${businessId}`, {
+      headers: { 'x-business-token': businessId }
+    });
+    allLeads = await response.json();
+    updateStats();
+    renderLeads(allLeads);
+  } catch(e) {
+    console.log('Could not load leads:', e);
+  }
+}
+
+function updateStats() {
+  document.getElementById('totalLeads').textContent = allLeads.length;
+  document.getElementById('hotLeads').textContent = allLeads.filter(l => l.status === 'HOT').length;
+  document.getElementById('warmLeads').textContent = allLeads.filter(l => l.status === 'WARM').length;
+  document.getElementById('coldLeads').textContent = allLeads.filter(l => l.status === 'COLD').length;
+}
+
+function filterLeads(status) {
+  ['ALL', 'HOT', 'WARM', 'COLD'].forEach(s => {
+    const btn = document.getElementById('filter-' + s);
+    if (s === status) {
+      btn.style.background = s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853';
+      btn.style.color = '#000';
+      btn.style.border = 'none';
+    } else {
+      btn.style.background = 'transparent';
+      btn.style.color = s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853';
+      btn.style.border = `1px solid ${s === 'HOT' ? '#ff4444' : s === 'WARM' ? '#ffaa00' : s === 'COLD' ? '#4499ff' : '#00c853'}`;
+    }
+  });
+  const filtered = status === 'ALL' ? allLeads : allLeads.filter(l => l.status === status);
+  renderLeads(filtered);
+}
+
+function renderLeads(leads) {
+  const container = document.getElementById('leadsContainer');
+  if (!leads || leads.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <p>No leads found!</p>
+        <small style="display:block;margin-top:8px;">Connect your Twilio account to start getting leads!</small>
+      </div>`;
+    return;
+  }
+  container.innerHTML = leads.map(lead => {
+    const color = lead.status === 'HOT' ? '#ff4444' : lead.status === 'WARM' ? '#ffaa00' : '#4499ff';
+    const emoji = lead.status === 'HOT' ? '🔥 HOT' : lead.status === 'WARM' ? '🟡 WARM' : '🧊 COLD';
+    return `
+      <div class="lead-card" style="border:1px solid ${color}">
+        <div class="lead-header">
+          <div>
+            <div class="lead-name">${lead.name || 'Unknown'} 👤</div>
+            <div class="lead-detail">🔧 ${lead.service || 'Not specified'}</div>
+            <div class="lead-detail">📅 ${lead.appointment || 'Not set'}</div>
+            ${lead.conversationSummary ? `<div class="lead-summary">📝 ${lead.conversationSummary}</div>` : ''}
+            ${lead.nextAction ? `<div class="lead-action">➡️ ${lead.nextAction}</div>` : ''}
+            <div class="returning-badge">${lead.isReturning ? '🔄 Returning Customer' : '🆕 New Customer'}</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="lead-score" style="color:${color}">${lead.score || 0}</div>
+            <div class="lead-badge" style="background:${color}">${emoji}</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+loadLeads();
+setInterval(loadLeads, 30000);
 </script>
 </body>
 </html>
