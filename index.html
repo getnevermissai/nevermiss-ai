@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
+body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; overflow-x: hidden; }
 
 /* NAVBAR */
 .navbar {
@@ -87,7 +87,7 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
 .hero h1 span { color: #00c853; }
 .hero p {
   font-size: clamp(15px, 2vw, 19px);
-  color: #666; max-width: 560px; margin: 0 auto 36px;
+  color: #A1A1AA; max-width: 560px; margin: 0 auto 36px;
   line-height: 1.6;
 }
 .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
@@ -231,7 +231,7 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
 }
 .fcard-icon { font-size: 36px; margin-bottom: 12px; }
 .fcard h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-.fcard p { color: #666; font-size: 13px; line-height: 1.6; }
+.fcard p { color: #A1A1AA; font-size: 13px; line-height: 1.6; }
 
 /* PWA SECTION */
 .pwa-wrap { padding: 80px 20px; }
@@ -533,6 +533,10 @@ footer a:hover { color: #00c853; }
     <div class="demo-title">Try It Live Right Now!</div>
     <div class="demo-sub">Enter your number and get a real CallZap AI text in 10 seconds!</div>
     <div class="demo-input-row">
+      @media(max-width:500px) {
+  .demo-input-row { flex-direction: column; }
+  .demo-btn { width: 100%; }
+}
       <input class="demo-input" id="demoPhone" placeholder="+1 (555) 000-0000" type="tel">
       <button class="demo-btn" onclick="sendDemo()">Send Demo ⚡</button>
     </div>
