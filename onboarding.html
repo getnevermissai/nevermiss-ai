@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Your CallZap Line ⚡</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0a; color: white; font-family: sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.container { max-width: 560px; width: 100%; }
+.logo { color: #00c853; font-size: 24px; font-weight: 900; text-align: center; margin-bottom: 32px; }
+.card { background: #111; border: 1px solid #1a3a2a; border-radius: 20px; padding: 36px; }
+.step-indicator { display: flex; gap: 8px; margin-bottom: 32px; justify-content: center; }
+.step-dot { width: 10px; height: 10px; border-radius: 50%; background: #222; }
+.step-dot.active { background: #00c853; }
+.step-dot.done { background: #00c853; opacity: 0.5; }
+.step { display: none; }
+.step.active { display: block; }
+.step-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+.step-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; text-align: center; }
+.step-sub { color: #555; font-size: 14px; text-align: center; margin-bottom: 28px; line-height: 1.6; }
+.input-label { color: #888; font-size: 13px; display: block; margin-bottom: 8px; }
+.input-field { width: 100%; padding: 14px 16px; background: #1a1a1a; border: 1px solid #333; border-radius: 10px; color: white; font-size: 16px; outline: none; margin-bottom: 16px; }
+.input-field:focus { border-color: #00c853; }
+select.input-field { cursor: pointer; }
+.btn-primary { width: 100%; padding: 14px; background: #00c853; color: #000; border: none; border-radius: 10px; font-weight: 800; font-size: 16px; cursor: pointer; transition: all 0.2s; }
+.btn-primary:hover { background: #00a846; }
+.info-box { background: #0a2a1a; border: 1px solid #00c853; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.info-box p { color: #00c853; font-size: 13px; line-height: 1.7; }
+.number-display { background: #0a2a1a; border: 2px solid #00c853; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
+.number-big { font-size: 28px; font-weight: 900; color: #00c853; margin-bottom: 4px; }
+.number-sub { color: #555; font-size: 13px; }
+.forwarding-code { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+.code-label { color: #888; font-size: 12px; margin-bottom: 8px; display: block; }
+.code-value { font-size: 22px; font-weight: 900; color: #00c853; font-family: monospace; }
+.steps-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.step-item { display: flex; align-items: flex-start; gap: 12px; }
+.step-num-badge { width: 28px; height: 28px; background: #00c853; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #000; font-size: 13px; flex-shrink: 0; }
+.step-item-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.step-item-text p { color: #555; font-size: 12px; }
+.loading { text-align: center; padding: 20px; display: none; }
+.loading-spinner { width: 40px; height: 40px; border: 3px solid #333; border-top: 3px solid #00c853; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.error-msg { color: #ff4444; font-size: 13px; margin-bottom: 12px; display: none; }
+.whatsapp-notice { background: #1a1a0a; border: 1px solid #ffaa00; border-radius: 10px; padding: 14px; margin-bottom: 16px; color: #ffaa00; font-size: 13px; display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">CallZap ⚡</div>
+  <div class="card">
+
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
+      <div class="step-dot" id="dot4"></div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step1">
+      <div class="step-icon">🌍</div>
+      <div class="step-title">Where is your business?</div>
+      <div class="step-sub">We'll set up the right messaging channel for your country!</div>
+
+      <label class="input-label">Select Your Country</label>
+      <select class="input-field" id="country">
+        <option value="">Choose country...</option>
+        <option value="GB">🇬🇧 United Kingdom (SMS + WhatsApp)</option>
+        <option value="AU">🇦🇺 Australia (SMS + WhatsApp)</option>
+        <option value="US">🇺🇸 United States (WhatsApp only)</option>
+      </select>
+
+      <div class="whatsapp-notice" id="usaNotice">
+        ℹ️ US businesses use <b>WhatsApp</b> for instant messaging — no carrier delays, no spam filters!
+      </div>
+
+      <label class="input-label">Business Name</label>
+      <input class="input-field" id="bizName" placeholder="e.g. Sarah's Beauty Salon">
+
+      <label class="input-label">Your Services</label>
+      <input class="input-field" id="bizServices" placeholder="e.g. Haircut, Color, Spa, Nails">
+
+      <label class="input-label">Working Hours</label>
+      <input class="input-field" id="bizHours" placeholder="e.g. 9 AM - 6 PM">
+
+      <div class="error-msg" id="error1">Please fill all fields!</div>
+      <button class="btn-primary" onclick="goStep2()">Continue →</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step2">
+      <div class="step-icon">📞</div>
+      <div class="step-title">Get Your CallZap Number</div>
+      <div class="step-sub">Enter your area code and we'll instantly assign you a local phone number!</div>
+
+      <div class="info-box">
+        <p>💡 <b>Why area code?</b> Local numbers get 40% more callbacks than toll-free numbers!</p>
+      </div>
+
+      <label class="input-label" id="areaCodeLabel">Enter your area code</label>
+      <input class="input-field" id="areaCode" placeholder="e.g. 512" maxlength="5" type="tel">
+
+      <div class="error-msg" id="error2">Please enter a valid area code!</div>
+      <button class="btn-primary" onclick="buyNumber()" id="buyBtn">Get My Number ⚡</button>
+      <div class="loading" id="loadingDiv">
+        <div class="loading-spinner"></div>
+        <p style="color:#555;font-size:14px;">Finding your local number...</p>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step3">
+      <div class="step-icon">🎉</div>
+      <div class="step-title">Your CallZap Line is Live!</div>
+      <div class="step-sub">Now set up call forwarding so missed calls go to CallZap!</div>
+
+      <div class="number-display">
+        <div class="number-big" id="assignedNumber">+1 (512) 888-0199</div>
+        <div class="number-sub">Your CallZap Number</div>
+      </div>
+
+      <div class="forwarding-code">
+        <span class="code-label">📱 Dial this code from your business phone:</span>
+        <div class="code-value" id="forwardingCode">*61*15128880199#</div>
+      </div>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num-badge">1</div>
+          <div class="step-item-text">
+            <h4>Open your phone dialer</h4>
+            <p>Use your existing business phone</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num-badge">2</div>
+          <div class="step-item-text">
+            <h4>Dial the code above</h4>
+            <p>This sets up call forwarding when you don't answer</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num-badge">3</div>
+          <div class="step-item-text">
+            <h4>You're done! ✅</h4>
+            <p>Missed calls will now trigger instant AI text-backs!</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="goStep4()">I've Set Up Forwarding ✅</button>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step" id="step4">
+      <div class="step-icon">🚀</div>
+      <div class="step-title">CallZap is Active!</div>
+      <div class="step-sub">Every missed call will now get an instant AI text-back within 5 seconds!</div>
+
+      <div class="info-box">
+        <p>✅ <b>What happens now:</b><br><br>
+        1. Customer calls your business<br>
+        2. You miss the call<br>
+        3. CallZap texts them within 5 seconds<br>
+        4. AI qualifies the lead<br>
+        5. Lead appears in dashboard as HOT 🔥 WARM 🟡 or COLD 🧊</p>
+      </div>
+
+      <button class="btn-primary" onclick="window.location.href='dashboard.html'">
+        Go to Dashboard →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let selectedCountry = '';
+
+function updateDots(step) {
+  for(let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('dot' + i);
+    if(i < step) dot.className = 'step-dot done';
+    else if(i === step) dot.className = 'step-dot active';
+    else dot.className = 'step-dot';
+  }
+}
+
+function showStep(num) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + num).classList.add('active');
+  updateDots(num);
+}
+
+// Show USA WhatsApp notice
+document.getElementById('country').addEventListener('change', function() {
+  const notice = document.getElementById('usaNotice');
+  notice.style.display = this.value === 'US' ? 'block' : 'none';
+});
+
+function goStep2() {
+  const country = document.getElementById('country').value;
+  const bizName = document.getElementById('bizName').value.trim();
+  const services = document.getElementById('bizServices').value.trim();
+  const hours = document.getElementById('bizHours').value.trim();
+
+  if (!country || !bizName || !services) {
+    document.getElementById('error1').style.display = 'block';
+    return;
+  }
+
+  selectedCountry = country;
+
+  // Update area code label
+  const label = document.getElementById('areaCodeLabel');
+  const input = document.getElementById('areaCode');
+  if(country === 'GB') {
+    label.textContent = 'Enter your UK area code (e.g. 020 for London)';
+    input.placeholder = 'e.g. 020';
+  } else if(country === 'AU') {
+    label.textContent = 'Enter your Australia area code (e.g. 02 for Sydney)';
+    input.placeholder = 'e.g. 02';
+  } else {
+    label.textContent = 'Enter your US area code (e.g. 512 for Austin)';
+    input.placeholder = 'e.g. 512';
+  }
+
+  // Save config
+  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  user.businessConfig = { bizName, services, hours, country };
+  localStorage.setItem('currentUser', JSON.stringify(user));
+
+  showStep(2);
+}
+
+async function buyNumber() {
+  const areaCode = document.getElementById('areaCode').value.trim();
+  if (!areaCode) {
+    document.getElementById('error2').style.display = 'block';
+    return;
+  }
+
+  // Strip leading zero for UK/AU
+  let formattedAreaCode = areaCode;
+  if ((selectedCountry === 'GB' || selectedCountry === 'AU') && formattedAreaCode.startsWith('0')) {
+    formattedAreaCode = formattedAreaCode.substring(1);
+  }
+
+  document.getElementById('buyBtn').style.display = 'none';
+  document.getElementById('loadingDiv').style.display = 'block';
+
+  try {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const response = await fetch('https://callzap-backend.onrender.com/buy-number', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        areaCode: formattedAreaCode,
+        country: selectedCountry,
+        businessName: user.businessConfig?.bizName || 'Business',
+        userId: user.email || 'default'
+      })
+    });
+
+    const data = await response.json();
+
+    if(data.success) {
+      const phone = data.phoneNumber;
+      document.getElementById('assignedNumber').textContent = phone;
+
+      // Generate country-specific forwarding code
+      const cleanDigits = phone.replace(/\D/g, '');
+
+let forwardingCode = '';
+if (selectedCountry === 'GB') {
+  forwardingCode = `**61*${cleanDigits}#`;
+} else if (selectedCountry === 'AU') {
+  forwardingCode = `*61*${cleanDigits}#`;
+} else {
+  forwardingCode = `*61*${cleanDigits}#`;
+}
+
+document.getElementById('forwardingCode').textContent = forwardingCode;
+
+      // Save phone to user
+      user.twilioPhone = phone;
+      localStorage.setItem('currentUser', JSON.stringify(user));
+
+      showStep(3);
+    } else {
+      throw new Error(data.error || 'Failed');
+    }
+
+  } catch(error) {
+    document.getElementById('loadingDiv').style.display = 'none';
+    document.getElementById('buyBtn').style.display = 'block';
+    document.getElementById('error2').textContent = 'Could not find number. Try a different area code!';
+    document.getElementById('error2').style.display = 'block';
+  }
+}
+
+function goStep4() {
+  showStep(4);
+}
+</script>
+</body>
+</html>
