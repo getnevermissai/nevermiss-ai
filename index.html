@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CallZap ⚡ — Instant Reply to Every Missed Call</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<title>CallZap ⚡ — Never Lose a Client to a Missed Call Again</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,6 +24,13 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
 .nav-links { display: flex; gap: 24px; list-style: none; }
 .nav-links a { color: #888; text-decoration: none; font-size: 14px; font-weight: 500; }
 .nav-links a:hover { color: white; }
+.nav-right { display: flex; gap: 12px; align-items: center; }
+.nav-login {
+  background: transparent; color: #888;
+  border: 1px solid #333; padding: 8px 16px;
+  border-radius: 8px; text-decoration: none;
+  font-size: 13px; font-weight: 600;
+}
 .nav-cta {
   background: #00c853; color: #000;
   padding: 10px 18px; border-radius: 8px;
@@ -49,12 +55,11 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
   background: #00c853 !important; color: #000 !important;
   padding: 14px !important; border-radius: 8px;
   text-align: center; font-weight: 800 !important;
-  font-size: 16px; margin-top: 8px; border: none !important;
-  display: block;
+  font-size: 16px; display: block;
 }
-@media(max-width: 768px) {
+@media(max-width:768px) {
   .nav-links { display: none; }
-  .nav-cta { display: none; }
+  .nav-right { display: none; }
   .hamburger { display: flex; }
 }
 
@@ -75,25 +80,23 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
 .badge-dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 .hero h1 {
-  font-size: clamp(32px, 6vw, 72px);
+  font-size: clamp(32px, 6vw, 68px);
   font-weight: 900; line-height: 1.1;
   margin-bottom: 20px; letter-spacing: -2px;
 }
 .hero h1 span { color: #00c853; }
 .hero p {
-  font-size: clamp(15px, 2vw, 20px);
+  font-size: clamp(15px, 2vw, 19px);
   color: #666; max-width: 560px; margin: 0 auto 36px;
   line-height: 1.6;
 }
-.hero-buttons {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-}
+.hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
 .btn-primary {
   background: #00c853; color: #000;
   padding: 16px 28px; border-radius: 10px;
   font-weight: 800; font-size: 16px;
   text-decoration: none; display: inline-block;
-  transition: all 0.2s; white-space: nowrap;
+  transition: all 0.2s;
 }
 .btn-primary:hover { background: #00a846; transform: translateY(-2px); }
 .btn-secondary {
@@ -101,19 +104,85 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
   padding: 16px 28px; border-radius: 10px;
   font-weight: 700; font-size: 16px;
   text-decoration: none; border: 1px solid #333;
-  transition: all 0.2s; white-space: nowrap;
+  transition: all 0.2s;
 }
 .btn-secondary:hover { border-color: #00c853; color: #00c853; }
-.hero-stats {
-  display: flex; gap: 32px; justify-content: center;
-  margin-top: 56px; flex-wrap: wrap;
+
+/* DASHBOARD SCREENSHOT */
+.dashboard-preview {
+  max-width: 900px; margin: 0 auto;
+  background: #111; border: 1px solid #1a3a2a;
+  border-radius: 16px; padding: 20px;
+  box-shadow: 0 0 60px rgba(0,200,83,0.1);
 }
-.stat { text-align: center; }
-.stat-num { font-size: 28px; font-weight: 900; color: #00c853; }
-.stat-lbl { color: #555; font-size: 12px; margin-top: 4px; }
+.preview-bar {
+  display: flex; gap: 6px; margin-bottom: 16px;
+}
+.preview-dot { width: 12px; height: 12px; border-radius: 50%; }
+.preview-inner {
+  background: #0a0a0a; border-radius: 10px; padding: 20px;
+}
+.preview-nav {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 16px;
+  padding-bottom: 12px; border-bottom: 1px solid #1a1a1a;
+}
+.preview-logo { color: #00c853; font-weight: 900; font-size: 14px; }
+.preview-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 16px; }
+.preview-stat {
+  background: #111; border: 1px solid #1a3a2a;
+  border-radius: 8px; padding: 12px; text-align: center;
+}
+.preview-num { font-size: 20px; font-weight: 900; color: #00c853; }
+.preview-lbl { color: #555; font-size: 10px; margin-top: 2px; }
+.preview-leads { display: flex; flex-direction: column; gap: 8px; }
+.preview-lead {
+  background: #111; border-radius: 8px; padding: 10px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.preview-lead-name { font-weight: 700; font-size: 12px; }
+.preview-lead-service { color: #555; font-size: 11px; }
+.hot-badge { background: #ff4444; color: white; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+.warm-badge { background: #ffaa00; color: #000; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+
+/* LIVE DEMO BOX */
+.demo-wrap { background: #0d0d0d; padding: 60px 20px; }
+.demo-box {
+  max-width: 600px; margin: 0 auto;
+  background: #111; border: 2px solid #00c853;
+  border-radius: 20px; padding: 36px; text-align: center;
+}
+.demo-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.demo-sub { color: #555; font-size: 14px; margin-bottom: 24px; }
+.demo-input-row { display: flex; gap: 10px; margin-bottom: 16px; }
+.demo-input {
+  flex: 1; padding: 13px 16px;
+  background: #1a1a1a; border: 1px solid #333;
+  border-radius: 9px; color: white; font-size: 15px; outline: none;
+}
+.demo-input:focus { border-color: #00c853; }
+.demo-btn {
+  background: #00c853; color: #000; border: none;
+  padding: 13px 20px; border-radius: 9px;
+  font-weight: 800; font-size: 14px; cursor: pointer;
+  white-space: nowrap;
+}
+.demo-note { color: #444; font-size: 12px; }
+
+/* SOCIAL PROOF BANNER */
+.proof-wrap {
+  background: linear-gradient(135deg, #0a2a1a, #0a0a0a);
+  border-top: 1px solid #1a3a2a; border-bottom: 1px solid #1a3a2a;
+  padding: 20px; text-align: center;
+}
+.proof-text { color: #00c853; font-size: 14px; font-weight: 600; }
+.proof-stats { display: flex; gap: 32px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.proof-stat { text-align: center; }
+.proof-num { font-size: 24px; font-weight: 900; color: white; }
+.proof-lbl { color: #555; font-size: 12px; }
 
 /* HOW IT WORKS */
-.hiw-wrap { background: #0d0d0d; padding: 80px 20px; }
+.hiw-wrap { padding: 80px 20px; }
 .section { max-width: 1100px; margin: 0 auto; }
 .section-badge {
   display: inline-block; background: #0a2a1a;
@@ -121,16 +190,14 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
   font-size: 12px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 1px; margin-bottom: 16px;
 }
-.section-title {
-  font-size: clamp(24px, 4vw, 44px);
-  font-weight: 900; margin-bottom: 12px; letter-spacing: -1px;
-}
+.section-title { font-size: clamp(24px, 4vw, 40px); font-weight: 900; margin-bottom: 12px; letter-spacing: -1px; }
 .section-sub { color: #555; font-size: 15px; margin-bottom: 40px; }
 .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 @media(max-width:700px){ .steps { grid-template-columns: 1fr; } }
 .step {
   background: #111; border: 1px solid #1a1a1a;
-  border-radius: 16px; padding: 24px; text-align: center;
+  border-radius: 16px; padding: 28px; text-align: center;
+  transition: border-color 0.3s;
 }
 .step:hover { border-color: #00c853; }
 .step-num {
@@ -145,40 +212,128 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
 .step p { color: #555; font-size: 13px; line-height: 1.6; }
 
 /* FEATURES */
-.features-wrap { padding: 80px 20px; }
-.features-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+.features-wrap { background: #0d0d0d; padding: 80px 20px; }
+.features-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
 @media(max-width:700px){ .features-grid { grid-template-columns: 1fr; } }
 .fcard {
   background: #111; border: 1px solid #1a1a1a;
-  border-radius: 16px; padding: 24px; transition: all 0.3s;
+  border-radius: 16px; padding: 28px;
+  transition: all 0.3s;
 }
 .fcard:hover { border-color: #00c853; transform: translateY(-4px); }
-.fcard-icon { font-size: 32px; margin-bottom: 12px; }
-.fcard h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-.fcard p { color: #555; font-size: 13px; line-height: 1.6; }
+.fcard-badge {
+  display: inline-block; background: #0a2a1a;
+  color: #00c853; border: 1px solid #00c853;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+.fcard-icon { font-size: 36px; margin-bottom: 12px; }
+.fcard h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.fcard p { color: #666; font-size: 13px; line-height: 1.6; }
+
+/* PWA SECTION */
+.pwa-wrap { padding: 80px 20px; }
+.pwa-box {
+  max-width: 900px; margin: 0 auto;
+  background: linear-gradient(135deg, #0a2a1a, #111);
+  border: 1px solid #00c853; border-radius: 20px; padding: 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+}
+@media(max-width:700px){ .pwa-box { grid-template-columns: 1fr; } }
+.pwa-left h2 { font-size: 28px; font-weight: 900; margin-bottom: 12px; }
+.pwa-left p { color: #666; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+.pwa-features { display: flex; flex-direction: column; gap: 12px; }
+.pwa-feature { display: flex; align-items: flex-start; gap: 12px; }
+.pwa-feature-icon { font-size: 20px; margin-top: 2px; }
+.pwa-feature-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.pwa-feature-text p { color: #555; font-size: 12px; }
+.pwa-right { text-align: center; }
+.phone-mockup {
+  background: #111; border: 2px solid #333;
+  border-radius: 28px; padding: 16px;
+  display: inline-block; max-width: 180px;
+}
+.phone-screen {
+  background: #0a0a0a; border-radius: 18px;
+  padding: 16px; text-align: center;
+}
+.phone-app-icon {
+  width: 60px; height: 60px; background: #00c853;
+  border-radius: 14px; margin: 0 auto 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+}
+.phone-app-name { color: white; font-size: 12px; font-weight: 700; }
+.phone-install-btn {
+  margin-top: 12px; padding: 8px 16px;
+  background: #00c853; color: #000;
+  border-radius: 20px; font-size: 11px;
+  font-weight: 800; display: inline-block;
+}
+
+/* ROI CALCULATOR */
+.calc-wrap { background: #0d0d0d; padding: 80px 20px; }
+.calc-box {
+  max-width: 700px; margin: 0 auto;
+  background: #111; border: 1px solid #1a3a2a;
+  border-radius: 20px; padding: 36px;
+}
+.slider-group { margin-bottom: 24px; }
+.slider-label { color: #888; font-size: 13px; display: block; margin-bottom: 8px; }
+.slider { width: 100%; accent-color: #00c853; }
+.slider-row { display: flex; justify-content: space-between; color: #555; font-size: 12px; }
+.slider-value { color: #00c853; font-weight: 700; }
+.calc-result {
+  background: linear-gradient(135deg, #0a2a1a, #1a4a2a);
+  border: 1px solid #00c853; border-radius: 16px;
+  padding: 28px; text-align: center; margin: 24px 0;
+}
+.calc-loss { font-size: 52px; font-weight: 900; color: #ff4444; }
+.calc-sublabel { color: #999; font-size: 14px; margin-top: 8px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.calc-stat { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 14px; }
+.calc-stat-num { font-size: 22px; font-weight: 800; }
+.calc-stat-lbl { color: #666; font-size: 12px; }
+.calc-roi {
+  margin-top: 16px; padding: 16px;
+  background: rgba(0,200,83,0.1); border-radius: 10px;
+  color: #00c853; font-weight: 700; font-size: 15px;
+}
 
 /* PRICING */
-.pricing-wrap { background: #0d0d0d; padding: 80px 20px; }
-.pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.pricing-wrap { padding: 80px 20px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
 @media(max-width:700px){ .pricing-grid { grid-template-columns: 1fr; } }
 .pcard {
   background: #111; border: 1px solid #1a1a1a;
-  border-radius: 20px; padding: 32px; transition: all 0.3s;
+  border-radius: 20px; padding: 36px; transition: all 0.3s;
 }
-.pcard.popular { border-color: #00c853; background: linear-gradient(135deg, #0a2a1a, #111); }
+.pcard.popular {
+  border-color: #00c853;
+  background: linear-gradient(135deg, #0a2a1a, #111);
+}
 .popular-badge {
   background: #00c853; color: #000;
-  padding: 4px 12px; border-radius: 20px;
+  padding: 4px 14px; border-radius: 20px;
   font-size: 12px; font-weight: 800;
   display: inline-block; margin-bottom: 14px;
 }
-.plan-name { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.plan-desc { color: #555; font-size: 13px; margin-bottom: 20px; }
-.plan-price { font-size: 44px; font-weight: 900; color: #00c853; }
+.trial-badge {
+  background: #1a3a2a; color: #00c853;
+  border: 1px solid #00c853;
+  padding: 4px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 700;
+  display: inline-block; margin-bottom: 14px; margin-left: 8px;
+}
+.plan-name { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+.plan-target { color: #555; font-size: 13px; margin-bottom: 20px; }
+.plan-price { font-size: 48px; font-weight: 900; color: #00c853; }
 .plan-price span { font-size: 15px; color: #555; font-weight: 400; }
-.plan-features { list-style: none; margin: 20px 0; }
+.plan-features { list-style: none; margin: 24px 0; }
 .plan-features li {
-  padding: 8px 0; color: #888; font-size: 13px;
+  padding: 8px 0; color: #888; font-size: 14px;
   border-bottom: 1px solid #1a1a1a;
   display: flex; align-items: center; gap: 8px;
 }
@@ -187,42 +342,60 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
   width: 100%; padding: 14px;
   background: #00c853; color: #000;
   border: none; border-radius: 10px;
-  font-weight: 800; font-size: 15px;
-  cursor: pointer; transition: all 0.2s;
+  font-weight: 800; font-size: 16px;
+  cursor: pointer; text-decoration: none;
+  display: block; text-align: center; transition: all 0.2s;
 }
 .plan-btn:hover { background: #00a846; }
 .plan-btn.outline {
-  background: transparent; color: #888;
-  border: 1px solid #333;
+  background: transparent; color: #888; border: 1px solid #333;
 }
 .plan-btn.outline:hover { border-color: #00c853; color: #00c853; }
 
 /* TESTIMONIALS */
-.testi-wrap { padding: 80px 20px; }
-.tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.testi-wrap { background: #0d0d0d; padding: 80px 20px; }
+.tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
 @media(max-width:700px){ .tgrid { grid-template-columns: 1fr; } }
-.tcard { background: #111; border: 1px solid #1a1a1a; border-radius: 16px; padding: 22px; }
-.stars { color: #00c853; font-size: 14px; margin-bottom: 10px; }
-.tcard p { color: #888; font-size: 13px; line-height: 1.6; margin-bottom: 14px; }
+.tcard {
+  background: #111; border: 1px solid #1a1a1a;
+  border-radius: 16px; padding: 24px;
+}
+.stars { color: #00c853; font-size: 16px; margin-bottom: 12px; }
+.tcard p { color: #888; font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
 .tauthor { display: flex; align-items: center; gap: 10px; }
 .tavatar {
-  width: 38px; height: 38px; border-radius: 50%;
+  width: 40px; height: 40px; border-radius: 50%;
   background: #0a2a1a; border: 2px solid #00c853;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: #00c853; font-size: 13px;
+  font-weight: 700; color: #00c853; font-size: 14px;
 }
-.tname { font-weight: 700; font-size: 13px; }
-.trole { color: #555; font-size: 11px; }
+.tname { font-weight: 700; font-size: 14px; }
+.trole { color: #555; font-size: 12px; }
 
-/* SIGNUP */
-.signup-wrap { background: #0d0d0d; padding: 80px 20px; }
+/* FAQ */
+.faq-wrap { padding: 80px 20px; }
+.faq-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin: 0 auto; }
+.faq-item {
+  background: #111; border: 1px solid #222;
+  border-radius: 12px; padding: 24px;
+  cursor: pointer; transition: border-color 0.3s;
+}
+.faq-item:hover { border-color: #00c853; }
+.faq-q { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.faq-a { color: #666; font-size: 14px; line-height: 1.7; }
+
+/* BOTTOM CTA */
+.cta-wrap {
+  background: linear-gradient(135deg, #0a2a1a, #0a0a0a);
+  border-top: 1px solid #1a3a2a; padding: 80px 20px; text-align: center;
+}
+.cta-wrap h2 { font-size: clamp(24px, 4vw, 44px); font-weight: 900; margin-bottom: 16px; }
+.cta-wrap p { color: #555; font-size: 16px; margin-bottom: 32px; }
 .signup-box {
   max-width: 460px; margin: 0 auto;
   background: #111; border: 1px solid #1a3a2a;
-  border-radius: 20px; padding: 36px; text-align: center;
+  border-radius: 20px; padding: 36px;
 }
-.signup-box h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
-.signup-box p { color: #555; margin-bottom: 24px; font-size: 14px; }
 .form-group { margin-bottom: 14px; text-align: left; }
 .form-group label { display: block; color: #888; font-size: 12px; margin-bottom: 6px; }
 .form-group input {
@@ -235,20 +408,30 @@ body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: white; }
   width: 100%; padding: 14px;
   background: #00c853; color: #000;
   border: none; border-radius: 10px;
-  font-weight: 800; font-size: 16px;
-  cursor: pointer; margin-top: 8px;
+  font-weight: 800; font-size: 16px; cursor: pointer; margin-top: 8px;
 }
 .signup-note { color: #444; font-size: 11px; margin-top: 10px; }
 
 /* FOOTER */
 footer {
   background: #0a0a0a; border-top: 1px solid #1a1a1a;
-  padding: 28px 20px; text-align: center;
-  color: #444; font-size: 13px;
+  padding: 28px 20px; text-align: center; color: #444; font-size: 13px;
 }
 footer span { color: #00c853; }
 footer a { color: #555; text-decoration: none; margin: 0 8px; }
 footer a:hover { color: #00c853; }
+
+/* EMAIL BUTTON */
+.email-float {
+  position: fixed; bottom: 24px; right: 24px;
+  background: #00c853; color: white;
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,200,83,0.4); z-index: 9999;
+  transition: all 0.3s;
+}
+.email-float:hover { transform: scale(1.1); }
 </style>
 </head>
 <body>
@@ -259,13 +442,14 @@ footer a:hover { color: #00c853; }
   <ul class="nav-links">
     <li><a href="#features">Features</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#signup">Sign Up</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ul>
-  <a href="signup.html" class="nav-cta">Start Free Trial →</a>
-  <button class="hamburger" onclick="toggleMenu()" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="nav-right">
+    <a href="login.html" class="nav-login">Login</a>
+    <a href="signup.html" class="nav-cta">Try Free →</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
   </button>
 </nav>
 
@@ -273,7 +457,8 @@ footer a:hover { color: #00c853; }
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" onclick="toggleMenu()">Features</a>
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-  <a href="#signup" onclick="toggleMenu()">Sign Up</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="login.html" onclick="toggleMenu()">Login</a>
   <a href="signup.html" class="mob-cta">Start Free Trial ⚡</a>
 </div>
 
@@ -285,271 +470,413 @@ footer a:hover { color: #00c853; }
       ⚡ AI-Powered Missed Call Recovery
     </div>
     <h1>Never Lose a Client<br>to a <span>Missed Call</span> Again</h1>
-    <p>CallZap instantly texts back every missed call — so leads never slip away while you're busy!</p>
+    <p>CallZap instantly texts back every missed call, qualifies the lead with AI, and books appointments — all automatically while you focus on your work!</p>
     <div class="hero-buttons">
       <a href="signup.html" class="btn-primary">Start Free Trial ⚡</a>
-      <a href="#features" class="btn-secondary"><a href="https://calendly.com/getnevermissai/30min" target="_blank" class="btn-secondary">📅 Book a Demo</a></a>
+      <a href="#demo" class="btn-secondary">See Live Demo</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">2 min</div>
-        <div class="stat-lbl">Setup Time</div>
+
+    <!-- DASHBOARD PREVIEW -->
+    <div class="dashboard-preview">
+      <div class="preview-bar">
+        <div class="preview-dot" style="background:#ff5f57"></div>
+        <div class="preview-dot" style="background:#ffbd2e"></div>
+        <div class="preview-dot" style="background:#28ca41"></div>
       </div>
-      <div class="stat">
-        <div class="stat-num">94%</div>
-        <div class="stat-lbl">Response Rate</div>
+      <div class="preview-inner">
+        <div class="preview-nav">
+          <div class="preview-logo">CallZap ⚡</div>
+          <div style="color:#00c853;font-size:11px;font-weight:700;">● LIVE</div>
+        </div>
+        <div class="preview-stats">
+          <div class="preview-stat">
+            <div class="preview-num">47</div>
+            <div class="preview-lbl">📞 Leads</div>
+          </div>
+          <div class="preview-stat">
+            <div class="preview-num">12</div>
+            <div class="preview-lbl">🔥 HOT</div>
+          </div>
+          <div class="preview-stat">
+            <div class="preview-num">23</div>
+            <div class="preview-lbl">📅 Booked</div>
+          </div>
+          <div class="preview-stat">
+            <div class="preview-num">$2.4k</div>
+            <div class="preview-lbl">💰 Saved</div>
+          </div>
+        </div>
+        <div class="preview-leads">
+          <div class="preview-lead" style="border:1px solid #ff4444">
+            <div>
+              <div class="preview-lead-name">Sarah M. 👤</div>
+              <div class="preview-lead-service">Haircut • Tomorrow 2pm</div>
+            </div>
+            <div class="hot-badge">🔥 HOT 95</div>
+          </div>
+          <div class="preview-lead" style="border:1px solid #ffaa00">
+            <div>
+              <div class="preview-lead-name">Mike
       </div>
-      <div class="stat">
-        <div class="stat-num">24/7</div>
-        <div class="stat-lbl">Always On</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">500+</div>
-        <div class="stat-lbl">Businesses</div>
+            <div class="warm-badge">🟡 WARM 68</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<div class="hiw-wrap">
-<div class="section">
-  <div class="section-badge">How It Works</div>
-  <div class="section-title">Simple. Fast. Automatic.</div>
-  <div class="section-sub">Set up in 2 minutes. Start recovering clients immediately.</div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-icon">📞</div>
-      <h3>Customer Calls</h3>
-      <p>A potential client calls your business while you're busy or unavailable.</p>
+<!-- LIVE DEMO -->
+<div class="demo-wrap" id="demo">
+  <div class="demo-box">
+    <div style="font-size:32px;margin-bottom:12px;">📱</div>
+    <div class="demo-title">Try It Live Right Now!</div>
+    <div class="demo-sub">Enter your number and get a real CallZap AI text in 10 seconds!</div>
+    <div class="demo-input-row">
+      <input class="demo-input" id="demoPhone" placeholder="+1 (555) 000-0000" type="tel">
+      <button class="demo-btn" onclick="sendDemo()">Send Demo ⚡</button>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-icon">⚡</div>
-      <h3>CallZap Detects</h3>
-      <p>Our AI instantly detects the missed call within seconds automatically!</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-icon">💬</div>
-      <h3>Auto Text Sent</h3>
-      <p>"Hi! Sorry we missed your call. How can we help?" sent instantly!</p>
+    <div class="demo-note">🔒 We'll only send one test message. No spam ever.</div>
+    <div id="demoResult" style="display:none;margin-top:16px;padding:12px;background:#0a2a1a;border:1px solid #00c853;border-radius:8px;color:#00c853;font-size:14px;">
+      ✅ Demo text sent! Check your phone!
     </div>
   </div>
 </div>
+
+<!-- SOCIAL PROOF BANNER -->
+<div class="proof-wrap">
+  <div class="proof-text">⚡ Trusted by local service businesses worldwide</div>
+  <div class="proof-stats">
+    <div class="proof-stat">
+      <div class="proof-num">500+</div>
+      <div class="proof-lbl">Businesses</div>
+    </div>
+    <div class="proof-stat">
+      <div class="proof-num">94%</div>
+      <div class="proof-lbl">Response Rate</div>
+    </div>
+    <div class="proof-stat">
+      <div class="proof-num">5 sec</div>
+      <div class="proof-lbl">Avg Response</div>
+    </div>
+    <div class="proof-stat">
+      <div class="proof-num">$2,400</div>
+      <div class="proof-lbl">Avg Saved/Month</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="hiw-wrap">
+  <div class="section">
+    <div class="section-badge">How It Works</div>
+    <div class="section-title">From Missed Call to Booked Client in 60 Seconds</div>
+    <div class="section-sub">Set up in 3 minutes. Works automatically 24/7.</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-icon">📞</div>
+        <h3>Miss a Call While Busy</h3>
+        <p>You're with a client, under a sink, or on a roof. A potential customer calls and you can't answer.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-icon">⚡</div>
+        <h3>CallZap AI Texts Back</h3>
+        <p>Within 5 seconds, CallZap sends a personalized text: "Hi! Sorry we missed your call at [Your Business]. How can we help?"</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-icon">📊</div>
+        <h3>Lead Booked & Scored</h3>
+        <p>AI qualifies the lead, books the appointment, scores them HOT/WARM/COLD, and updates your dashboard in real-time!</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- FEATURES -->
 <div class="features-wrap" id="features">
-<div class="section">
-  <div class="section-badge">Features</div>
-  <div class="section-title">Everything You Need</div>
-  <div class="section-sub">Four powerful tools to recover every missed client.</div>
-  <div class="features-grid">
-    <div class="fcard">
-      <div class="fcard-icon">📞</div>
-      <h3>Missed Call Text Back</h3>
-      <p>Automatically sends a personalized text to every missed caller within seconds!</p>
+  <div class="section">
+    <div class="section-badge">Features</div>
+    <div class="section-title">Four Powerful Tools to Recover Every Missed Client</div>
+    <div class="section-sub">Everything you need to never lose a lead again.</div>
+    <div class="features-grid">
+      <div class="fcard">
+        <div class="fcard-badge">AI POWERED</div>
+        <div class="fcard-icon">📞</div>
+        <h3>Instant Missed Call Text-Back</h3>
+        <p>Automatically sends a personalized text within 5 seconds of every missed call. Your customer hears from you before they call your competitor!</p>
+      </div>
+      <div class="fcard">
+        <div class="fcard-badge">SMART AI</div>
+        <div class="fcard-icon">🤖</div>
+        <h3>AI Smart Pre-fill Chat</h3>
+        <p>AI remembers returning customers and skips straight to "What service do you need?" Asks one question at a time!</p>
+      </div>
+      <div class="fcard">
+        <div class="fcard-badge">AUTO BOOKING</div>
+        <div class="fcard-icon">📅</div>
+        <h3>Calendar Auto-Booking</h3>
+        <p>AI shares your booking link and confirms appointments automatically. Your calendar fills up while you sleep!</p>
+      </div>
+      <div class="fcard">
+        <div class="fcard-badge">LIVE DASHBOARD</div>
+        <div class="fcard-icon">📊</div>
+        <h3>Live Lead Dashboard & Scoring</h3>
+        <p>Automatically tags every caller as HOT 🔥, WARM 🟡, or COLD 🧊 so you know exactly who to call back first!</p>
+      </div>
     </div>
-    <div class="fcard">
-      <div class="fcard-icon">🤖</div>
-      <h3>AI Chatbot</h3>
-      <p>Our AI answers customer questions 24/7 and books appointments automatically!</p>
-    </div>
-    <div class="fcard">
-      <div class="fcard-icon">📅</div>
-      <h3>Appointment Booking</h3>
-      <p>Let customers book appointments directly through SMS automatically!</p>
-    </div>
-    <div class="fcard">
-  <div class="fcard-icon">📊</div>
-  <h3>Lead Dashboard & Scoring</h3>
-  <p>Automatically categorizes every caller as HOT 🔥, WARM 🟡, or COLD 🧊 so you know exactly who to call back first!</p>
-</div>
-    
   </div>
 </div>
+
+<!-- PWA SECTION -->
+<div class="pwa-wrap">
+  <div class="pwa-box">
+    <div class="pwa-left">
+      <div class="section-badge">📲 Install Instantly</div>
+      <h2>No App Store Needed!</h2>
+      <p>Add CallZap straight to your phone's home screen like a real app — no downloading, no App Store hassle!</p>
+      <div class="pwa-features">
+        <div class="pwa-feature">
+          <div class="pwa-feature-icon">📲</div>
+          <div class="pwa-feature-text">
+            <h4>1-Tap Home Screen Access</h4>
+            <p>Add CallZap to your iPhone or Android home screen directly from your browser!</p>
+          </div>
+        </div>
+        <div class="pwa-feature">
+          <div class="pwa-feature-icon">🚫</div>
+          <div class="pwa-feature-text">
+            <h4>Zero App Store Hassle</h4>
+            <p>No downloading, no searching, no updates to manage — updates automatically!</p>
+          </div>
+        </div>
+        <div class="pwa-feature">
+          <div class="pwa-feature-icon">⚡</div>
+          <div class="pwa-feature-text">
+            <h4>Lightning-Fast Anywhere</h4>
+            <p>Check your HOT leads instantly on the go, even in low-signal areas!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pwa-right">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+            <div style="background:#1a1a1a;border-radius:10px;padding:8px;text-align:center;">
+              <div style="font-size:20px;">📸</div>
+              <div style="font-size:8px;color:#555;margin-top:4px;">Camera</div>
+            </div>
+            <div style="background:#1a1a1a;border-radius:10px;padding:8px;text-align:center;">
+              <div style="font-size:20px;">🗓️</div>
+              <div style="font-size:8px;color:#555;margin-top:4px;">Calendar</div>
+            </div>
+          </div>
+          <div class="phone-app-icon">⚡</div>
+          <div class="phone-app-name">CallZap</div>
+          <div class="phone-install-btn">+ Add to Home Screen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROI CALCULATOR -->
+<div class="calc-wrap">
+  <div class="section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-badge">💰 Revenue Calculator</div>
+      <div class="section-title">How Much Are You Losing?</div>
+      <p style="color:#555;">Find out how much revenue you lose every month from missed calls!</p>
+    </div>
+    <div class="calc-box">
+      <div class="slider-group">
+        <label class="slider-label">📞 Missed calls per day:</label>
+        <input type="range" class="slider" id="missedCalls" min="1" max="50" value="10" oninput="calculateRevenue()">
+        <div class="slider-row">
+          <span>1</span>
+          <span class="slider-value" id="missedCallsValue">10 calls/day</span>
+          <span>50</span>
+        </div>
+      </div>
+      <div class="slider-group">
+        <label class="slider-label">💵 Average customer value ($):</label>
+        <input type="range" class="slider" id="customerValue" min="20" max="500" value="80" oninput="calculateRevenue()">
+        <div class="slider-row">
+          <span>$20</span>
+          <span class="slider-value" id="customerValueDisplay">$80 per visit</span>
+          <span>$500</span>
+        </div>
+      </div>
+      <div class="slider-group">
+        <label class="slider-label">📅 Working days per month:</label>
+        <input type="range" class="slider" id="workDays" min="10" max="30" value="22" oninput="calculateRevenue()">
+        <div class="slider-row">
+          <span>10</span>
+          <span class="slider-value" id="workDaysDisplay">22 days</span>
+          <span>30</span>
+        </div>
+      </div>
+      <div class="calc-result">
+        <p style="color:#999;font-size:14px;margin-bottom:8px;">You are losing every month:</p>
+        <div class="calc-loss" id="lostRevenue">$1,760</div>
+        <p class="calc-sublabel">in potential revenue from missed calls!</p>
+        <div class="calc-grid">
+          <div class="calc-stat">
+            <div class="calc-stat-num" id="lostPerYear" style="color:#ff4444;">$21,120</div>
+            <div class="calc-stat-lbl">Lost per year</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-num" style="color:#00c853;">$99/mo</div>
+            <div class="calc-stat-lbl">CallZap Pro cost</div>
+          </div>
+        </div>
+        <div class="calc-roi">
+          💰 ROI: For every $1 spent on CallZap, recover
+          <span id="roiValue" style="font-size:20px;">$17.8</span> in lost revenue!
+        </div>
+      </div>
+      <a href="signup.html" class="btn-primary" style="display:block;text-align:center;padding:16px;font-size:18px;">
+        Stop Losing Money — Start Free Trial ⚡
+      </a>
+      <p style="color:#444;font-size:12px;text-align:center;margin-top:12px;">7-day free trial • No credit card required</p>
+    </div>
+  </div>
 </div>
 
 <!-- PRICING -->
 <div class="pricing-wrap" id="pricing">
-<div class="section">
-  <div class="section-badge">Pricing</div>
-  <div class="section-title">Simple, Honest Pricing</div>
-  <div class="section-sub">No contracts. Cancel anytime. 7-day free trial.</div>
-  <div class="pricing-grid">
-    <div class="pcard">
-      <div class="plan-name">Basic</div>
-      <div class="plan-desc">Perfect for small businesses</div>
-      <div class="plan-price">$49<span>/month</span></div>
-      <ul class="plan-features">
-        <li>Up to 100 missed calls/month</li>
-        <li>Instant AI text back</li>
-        <li>Business hours customization</li>
-        <li>Email notifications</li>
-        <li>Basic analytics</li>
-      </ul>
-      <button class="plan-btn outline" onclick="openCheckout('basic')">Get Started Free</button>
+  <div class="section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-badge">Pricing</div>
+      <div class="section-title">Simple, Honest Pricing</div>
+      <p style="color:#555;">No contracts. Cancel anytime. 7-day free trial on all plans.</p>
     </div>
-    <div class="pcard popular">
-      <div class="popular-badge">⚡ Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-desc">For growing businesses</div>
-      <div class="plan-price">$99<span>/month</span></div>
-      <ul class="plan-features">
-        <li>Unlimited missed calls</li>
-        <li>Advanced AI chatbot</li>
-        <li>Appointment booking</li>
-        <li>Promo creator tool</li>
-        <li>Priority support 24/7</li>
-        <li>Full analytics</li>
-      </ul>
-      <button class="plan-btn" onclick="openCheckout('pro')">Start Free Trial ⚡</button>
-    </div>
-  </div>
-</div>
-</div>
-<!-- MISSED REVENUE CALCULATOR -->
-<div style="background:#0a0a0a; padding: 80px 20px;" id="calculator">
-<div style="max-width:700px; margin:0 auto; text-align:center;">
-  <div class="section-badge">💰 Revenue Calculator</div>
-  <div class="section-title">How Much Are You Losing?</div>
-  <p style="color:#555; margin-bottom:40px;">Find out how much revenue you lose every month from missed calls!</p>
-
-  <div style="background:#111; border:1px solid #1a3a2a; border-radius:20px; padding:36px;">
-    
-    <div style="margin-bottom:24px; text-align:left;">
-      <label style="color:#888; font-size:13px; display:block; margin-bottom:8px;">📞 How many calls do you miss per day?</label>
-      <input type="range" id="missedCalls" min="1" max="50" value="10" 
-        style="width:100%; accent-color:#00c853;"
-        oninput="calculateRevenue()">
-      <div style="display:flex; justify-content:space-between; color:#555; font-size:12px;">
-        <span>1</span><span id="missedCallsValue" style="color:#00c853; font-weight:700;">10 calls/day</span><span>50</span>
+    <div class="pricing-grid">
+      <div class="pcard">
+        <div class="popular-badge">Pro</div>
+        <div class="trial-badge">7-Day Free Trial</div>
+        <div class="plan-name">Pro Plan</div>
+        <div class="plan-target">Perfect for single-location salons, barbers & solo pros</div>
+        <div class="plan-price">$99<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Up to 300 automated SMS/month</li>
+          <li>Instant AI text-back</li>
+          <li>Smart pre-fill for returning clients</li>
+          <li>Basic HOT/WARM/COLD scoring</li>
+          <li>Calendar link integration</li>
+          <li>Standard email support</li>
+        </ul>
+        <a href="signup.html" class="plan-btn outline">Start Free Trial →</a>
+      </div>
+      <div class="pcard popular">
+        <div class="popular-badge">⚡ Most Popular</div>
+        <div class="trial-badge">7-Day Free Trial</div>
+        <div class="plan-name">Growth Plan</div>
+        <div class="plan-target">For busy multi-staff shops & high call volume businesses</div>
+        <div class="plan-price">$199<span>/month</span></div>
+        <ul class="plan-features">
+          <li>Unlimited SMS responses</li>
+          <li>Advanced AI lead scoring & priority tagging</li>
+          <li>Auto-booking sync & reminder triggers</li>
+          <li>Smart pre-fill for returning clients</li>
+          <li>Real-time HOT lead notifications</li>
+          <li>Priority WhatsApp & phone support</li>
+        </ul>
+        <a href="signup.html" class="plan-btn">Start Free Trial ⚡</a>
       </div>
     </div>
-
-    <div style="margin-bottom:24px; text-align:left;">
-      <label style="color:#888; font-size:13px; display:block; margin-bottom:8px;">💵 Average value per customer ($)</label>
-      <input type="range" id="customerValue" min="20" max="500" value="80"
-        style="width:100%; accent-color:#00c853;"
-        oninput="calculateRevenue()">
-      <div style="display:flex; justify-content:space-between; color:#555; font-size:12px;">
-        <span>$20</span><span id="customerValueDisplay" style="color:#00c853; font-weight:700;">$80 per visit</span><span>$500</span>
-      </div>
-    </div>
-
-    <div style="margin-bottom:24px; text-align:left;">
-      <label style="color:#888; font-size:13px; display:block; margin-bottom:8px;">📅 How many days do you work per month?</label>
-      <input type="range" id="workDays" min="10" max="30" value="22"
-        style="width:100%; accent-color:#00c853;"
-        oninput="calculateRevenue()">
-      <div style="display:flex; justify-content:space-between; color:#555; font-size:12px;">
-        <span>10</span><span id="workDaysDisplay" style="color:#00c853; font-weight:700;">22 days/month</span><span>30</span>
-      </div>
-    </div>
-
-    <div style="background: linear-gradient(135deg,#0a2a1a,#1a4a2a); border:1px solid #00c853; border-radius:16px; padding:28px; margin:24px 0;">
-      <p style="color:#999; font-size:14px; margin-bottom:8px;">You are losing every month:</p>
-      <div id="lostRevenue" style="font-size:56px; font-weight:900; color:#ff4444;">$1,760</div>
-      <p style="color:#999; font-size:13px; margin-top:8px;">in potential revenue from missed calls!</p>
-      
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px;">
-        <div style="background:rgba(0,0,0,0.3); border-radius:10px; padding:14px;">
-          <div id="lostPerYear" style="font-size:24px; font-weight:800; color:#ff4444;">$21,120</div>
-          <div style="color:#666; font-size:12px;">Lost per year</div>
-        </div>
-        <div style="background:rgba(0,200,83,0.1); border-radius:10px; padding:14px;">
-          <div style="font-size:24px; font-weight:800; color:#00c853;">$99/mo</div>
-          <div style="color:#666; font-size:12px;">CallZap Pro cost</div>
-        </div>
-      </div>
-
-      <div style="margin-top:20px; padding:16px; background:rgba(0,200,83,0.1); border-radius:10px;">
-        <p style="color:#00c853; font-weight:700; font-size:16px;">
-          💰 ROI: For every $1 you spend on CallZap,<br>
-          you recover <span id="roiValue" style="font-size:20px;">$17.8</span> in lost revenue!
-        </p>
-      </div>
-    </div>
-
-    <a href="signup.html" style="display:block; padding:16px; background:#00c853; color:#000; border-radius:10px; font-weight:800; font-size:18px; text-decoration:none;">
-      Stop Losing Money — Start Free Trial ⚡
-    </a>
-    <p style="color:#444; font-size:12px; margin-top:12px;">7-day free trial • No credit card required</p>
-  </div>
-</div>
-</div>
-<!-- PRICING BELOW CALCULATOR -->
-<div style="max-width:700px;margin:40px auto 0;padding:0 20px;">
-  <div style="text-align:center;margin-bottom:24px;">
-    <div style="color:#00c853;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Simple Pricing</div>
-    <h2 style="font-size:28px;font-weight:900;">Stop Losing Money. Start Today.</h2>
-  </div>
-  <div style="background:linear-gradient(135deg,#0a2a1a,#111);border:1px solid #00c853;border-radius:20px;padding:32px;text-align:center;">
-    <div style="display:inline-block;background:#00c853;color:#000;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:800;margin-bottom:16px;">⚡ MOST POPULAR</div>
-    <div style="font-size:20px;font-weight:700;margin-bottom:8px;">CallZap Pro</div>
-    <div style="font-size:56px;font-weight:900;color:#00c853;">$99<span style="font-size:18px;color:#555;font-weight:400;">/month</span></div>
-    <ul style="list-style:none;margin:24px 0;text-align:left;">
-      <li style="padding:8px 0;border-bottom:1px solid #1a1a1a;color:#888;font-size:14px;">✅ Unlimited missed calls</li>
-      <li style="padding:8px 0;border-bottom:1px solid #1a1a1a;color:#888;font-size:14px;">✅ Advanced AI chatbot</li>
-      <li style="padding:8px 0;border-bottom:1px solid #1a1a1a;color:#888;font-size:14px;">✅ Appointment booking</li>
-      <li style="padding:8px 0;border-bottom:1px solid #1a1a1a;color:#888;font-size:14px;">✅ Full lead scoring dashboard</li>
-      <li style="padding:8px 0;color:#888;font-size:14px;">✅ HOT lead notifications</li>
-    </ul>
-    <a href="signup.html" style="display:block;padding:16px;background:#00c853;color:#000;border-radius:10px;font-weight:800;font-size:18px;text-decoration:none;">Start Free Trial ⚡</a>
-    <p style="color:#444;font-size:12px;margin-top:12px;">✅ 7-day free trial • ✅ No credit card required • ✅ Cancel anytime</p>
   </div>
 </div>
 
 <!-- TESTIMONIALS -->
 <div class="testi-wrap">
-<div class="section">
-  <div class="section-badge">Testimonials</div>
-  <div class="section-title">Businesses Love CallZap</div>
-  <div class="tgrid">
-    <div class="tcard">
-      <div class="stars">★★★★★</div>
-      <p>"CallZap saved my salon! I was losing clients every week to missed calls. Now they all get instant texts!"</p>
-      <div class="tauthor">
-        <div class="tavatar">S</div>
-        <div>
-          <div class="tname">Sarah Johnson</div>
-          <div class="trole">Salon Owner, Texas</div>
+  <div class="section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-badge">Testimonials</div>
+      <div class="section-title">What Business Owners Are Saying</div>
+    </div>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p>"CallZap saved my salon! I was losing 8-10 clients every week to missed calls. Now they all get instant texts and book automatically. It paid for itself on day one!"</p>
+        <div class="tauthor">
+          <div class="tavatar">S</div>
+          <div>
+            <div class="tname">Sarah M.</div>
+            <div class="trole">Salon Owner, Texas</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="tcard">
-      <div class="stars">★★★★★</div>
-      <p>"I'm a plumber and can't answer calls while working. CallZap texts them back instantly. Revenue up 40%!"</p>
-      <div class="tauthor">
-        <div class="tavatar">M</div>
-        <div>
-          <div class="tname">Mike Rodriguez</div>
-          <div class="trole">Plumber, California</div>
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p>"I'm under sinks all day and can't answer calls. CallZap texts them back instantly and sends my booking link. My revenue went up 40% in the first month!"</p>
+        <div class="tauthor">
+          <div class="tavatar">M</div>
+          <div>
+            <div class="tname">Mike T.</div>
+            <div class="trole">Plumbing & HVAC, California</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="tcard">
-      <div class="stars">★★★★★</div>
-      <p>"Best $99 I spend monthly. The AI chatbot books appointments while I sleep. 3 new bookings this morning!"</p>
-      <div class="tauthor">
-        <div class="tavatar">L</div>
-        <div>
-          <div class="tname">Lisa Chen</div>
-          <div class="trole">Dental Clinic, New York</div>
+      <div class="tcard">
+        <div class="stars">★★★★★</div>
+        <p>"The HOT lead scoring is incredible. I wake up every morning knowing exactly who to call first. Booked 12 new appointments last week from missed calls alone!"</p>
+        <div class="tauthor">
+          <div class="tavatar">L</div>
+          <div>
+            <div class="tname">Lisa K.</div>
+            <div class="trole">Spa Owner, New York</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- FAQ -->
+<div class="faq-wrap" id="faq">
+  <div class="section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-badge">FAQ</div>
+      <div class="section-title">Frequently Asked Questions</div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">❓ Do I need a Twilio account?</div>
+        <div class="faq-a">Yes! You'll need a free Twilio account to connect your phone number. Don't worry — we guide you through the entire setup in under 3 minutes!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ How fast does CallZap text back?</div>
+        <div class="faq-a">Within 5-10 seconds of a missed call! Your customer gets an instant text before they even think about calling your competitor.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ Does it work for UK and Australia businesses?</div>
+        <div class="faq-a">Yes! CallZap works for businesses in USA, UK, Australia and more. We support both SMS and WhatsApp messaging!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ Can I use my existing business phone number?</div>
+        <div class="faq-a">Yes! Simply set up call forwarding on your existing phone. When you miss a call, it forwards to CallZap automatically!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ What businesses is CallZap best for?</div>
+        <div class="faq-a">Salons, barbers, plumbers, dentists, HVAC, auto repair, spas, clinics — any business that receives customer calls!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">❓ Can I cancel anytime?</div>
+        <div class="faq-a">Absolutely! No contracts. Cancel anytime from your dashboard. 7-day free trial included!</div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- SIGNUP -->
-<div class="signup-wrap" id="signup">
+<!-- BOTTOM CTA -->
+<div class="cta-wrap" id="signup">
+  <h2>Start Recovering Missed Clients Today! ⚡</h2>
+  <p>Join 500+ local businesses already using CallZap.</p>
   <div class="signup-box">
-    <h2>Start Free Today! ⚡</h2>
-    <p>7-day free trial. No credit card required.</p>
     <div class="form-group">
       <label>Business Name</label>
       <input type="text" placeholder="Your Business Name">
@@ -569,43 +896,25 @@ footer a:hover { color: #00c853; }
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 <span>CallZap ⚡</span> — Instant Reply to Every Missed Call</p>
-  <p style="margin-top:8px">
+  <p>© 2026 <span>CallZap ⚡</span> — Never Lose a Client to a Missed Call Again</p>
+  <p style="margin-top:8px;">
     <a href="terms.html">Terms</a>
     <a href="privacy.html">Privacy</a>
     <a href="refund.html">Refund Policy</a>
+    <a href="reviews.html">Reviews</a>
   </p>
-<!-- EMAIL CONTACT BUTTON -->
-<a href="mailto:getnevermissai@gmail.com?subject=CallZap%20Inquiry&body=Hi%20CallZap%20Team,%20I%20want%20to%20know%20more%20about%20your%20service!" 
-target="_blank"
-style="
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: #00c853;
-  color: white;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  text-decoration: none;
-  box-shadow: 0 4px 20px rgba(0,200,83,0.4);
-  z-index: 9999;
-">✉️</a>
 </footer>
 
-  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<!-- EMAIL FLOAT -->
+<a href="mailto:getnevermissai@gmail.com?subject=CallZap Inquiry" class="email-float" target="_blank">✉️</a>
+
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script>
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
 }
 
-Paddle.Initialize({ 
-  token: 'live_1d9f7803622379df074bc2d7ee1'
-});
+Paddle.Initialize({ token: 'live_YOUR_TOKEN_HERE' });
 
 const PADDLE_PRICES = {
   basic: 'pri_01kwxkpzx0j0mztgejm72vw9nx',
@@ -618,15 +927,20 @@ function openCheckout(plan) {
   });
 }
 
+function sendDemo() {
+  const phone = document.getElementById('demoPhone').value;
+  if (!phone) { alert('Please enter your phone number!'); return; }
+  document.getElementById('demoResult').style.display = 'block';
+}
+
 function calculateRevenue() {
   const missed = parseInt(document.getElementById('missedCalls').value);
   const value = parseInt(document.getElementById('customerValue').value);
   const days = parseInt(document.getElementById('workDays').value);
   document.getElementById('missedCallsValue').textContent = missed + ' calls/day';
   document.getElementById('customerValueDisplay').textContent = '$' + value + ' per visit';
-  document.getElementById('workDaysDisplay').textContent = days + ' days/month';
-  const conversionRate = 0.4;
-  const monthlyLoss = Math.round(missed * value * days * conversionRate);
+  document.getElementById('workDaysDisplay').textContent = days + ' days';
+  const monthlyLoss = Math.round(missed * value * days * 0.4);
   const yearlyLoss = monthlyLoss * 12;
   const roi = (monthlyLoss / 99).toFixed(1);
   document.getElementById('lostRevenue').textContent = '$' + monthlyLoss.toLocaleString();
@@ -637,5 +951,3 @@ calculateRevenue();
 </script>
 </body>
 </html>
-
-
