@@ -432,6 +432,10 @@ footer a:hover { color: #00c853; }
   transition: all 0.3s;
 }
 .email-float:hover { transform: scale(1.1); }
+  @media(max-width:500px) {
+  .demo-input-row { flex-direction: column; }
+  .demo-btn { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -533,10 +537,6 @@ footer a:hover { color: #00c853; }
     <div class="demo-title">Try It Live Right Now!</div>
     <div class="demo-sub">Enter your number and get a real CallZap AI text in 10 seconds!</div>
     <div class="demo-input-row">
-      @media(max-width:500px) {
-  .demo-input-row { flex-direction: column; }
-  .demo-btn { width: 100%; }
-}
       <input class="demo-input" id="demoPhone" placeholder="+1 (555) 000-0000" type="tel">
       <button class="demo-btn" onclick="sendDemo()">Send Demo ⚡</button>
     </div>
