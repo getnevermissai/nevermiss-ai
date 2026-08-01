@@ -93,9 +93,9 @@ select.input-field { cursor: pointer; }
     <div class="step" id="step2">
       <div class="step-icon">📞</div>
       <div class="step-title">Get Your CallZap Number</div>
-      <div class="step-sub">Enter your area code and we'll instantly assign you a local phone number!</div>
+      <div class="step-sub" id="step2Sub">Enter your area code and we'll instantly assign you a local phone number!</div>
 
-      <div class="info-box">
+      <div class="info-box" id="areaCodeInfoBox">
         <p>💡 <b>Why area code?</b> Local numbers get 40% more callbacks than toll-free numbers!</p>
       </div>
 
@@ -106,7 +106,7 @@ select.input-field { cursor: pointer; }
       <button class="btn-primary" onclick="buyNumber()" id="buyBtn">Get My Number ⚡</button>
       <div class="loading" id="loadingDiv">
         <div class="loading-spinner"></div>
-        <p style="color:#555;font-size:14px;">Finding your local number...</p>
+        <p style="color:#555;font-size:14px;">Finding your number...</p>
       </div>
     </div>
 
@@ -194,7 +194,6 @@ function showStep(num) {
   updateDots(num);
 }
 
-// Show USA WhatsApp notice
 document.getElementById('country').addEventListener('change', function() {
   const notice = document.getElementById('usaNotice');
   notice.style.display = this.value === 'US' ? 'block' : 'none';
@@ -213,21 +212,26 @@ function goStep2() {
 
   selectedCountry = country;
 
-  // Update area code label
-  const label = document.getElementById('areaCodeLabel');
-  const input = document.getElementById('areaCode');
-  if(country === 'GB') {
-    label.textContent = 'Enter your UK area code (e.g. 020 for London)';
-    input.placeholder = 'e.g. 020';
-  } else if(country === 'AU') {
-    label.textContent = 'Enter your Australia area code (e.g. 02 for Sydney)';
-    input.placeholder = 'e.g. 02';
+  // Show/hide area code based on country
+  const areaCodeInput = document.getElementById('areaCode');
+  const areaCodeLabel = document.getElementById('areaCodeLabel');
+  const areaCodeInfoBox = document.getElementById('areaCodeInfoBox');
+  const step2Sub = document.getElementById('step2Sub');
+
+  if(country === 'GB' || country === 'AU') {
+    areaCodeInput.style.display = 'none';
+    areaCodeLabel.style.display = 'none';
+    areaCodeInfoBox.style.display = 'none';
+    areaCodeInput.value = '00';
+    step2Sub.textContent = "We'll instantly assign you a mobile number for your business!";
   } else {
-    label.textContent = 'Enter your US area code (e.g. 512 for Austin)';
-    input.placeholder = 'e.g. 512';
+    areaCodeInput.style.display = 'block';
+    areaCodeLabel.style.display = 'block';
+    areaCodeInfoBox.style.display = 'block';
+    areaCodeInput.value = '';
+    step2Sub.textContent = "Enter your area code and we'll instantly assign you a local phone number!";
   }
 
-  // Save config
   const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
   user.businessConfig = { bizName, services, hours, country };
   localStorage.setItem('currentUser', JSON.stringify(user));
@@ -237,12 +241,12 @@ function goStep2() {
 
 async function buyNumber() {
   const areaCode = document.getElementById('areaCode').value.trim();
-  if (!areaCode) {
+
+  if (!areaCode && selectedCountry === 'US') {
     document.getElementById('error2').style.display = 'block';
     return;
   }
 
-  // Strip leading zero for UK/AU
   let formattedAreaCode = areaCode;
   if ((selectedCountry === 'GB' || selectedCountry === 'AU') && formattedAreaCode.startsWith('0')) {
     formattedAreaCode = formattedAreaCode.substring(1);
@@ -270,21 +274,19 @@ async function buyNumber() {
       const phone = data.phoneNumber;
       document.getElementById('assignedNumber').textContent = phone;
 
-      // Generate country-specific forwarding code
       const cleanDigits = phone.replace(/\D/g, '');
 
-let forwardingCode = '';
-if (selectedCountry === 'GB') {
-  forwardingCode = `**61*${cleanDigits}#`;
-} else if (selectedCountry === 'AU') {
-  forwardingCode = `*61*${cleanDigits}#`;
-} else {
-  forwardingCode = `*61*${cleanDigits}#`;
-}
+      let forwardingCode = '';
+      if (selectedCountry === 'GB') {
+        forwardingCode = `**61*${cleanDigits}#`;
+      } else if (selectedCountry === 'AU') {
+        forwardingCode = `*61*${cleanDigits}#`;
+      } else {
+        forwardingCode = `*61*${cleanDigits}#`;
+      }
 
-document.getElementById('forwardingCode').textContent = forwardingCode;
+      document.getElementById('forwardingCode').textContent = forwardingCode;
 
-      // Save phone to user
       user.twilioPhone = phone;
       localStorage.setItem('currentUser', JSON.stringify(user));
 
@@ -296,7 +298,7 @@ document.getElementById('forwardingCode').textContent = forwardingCode;
   } catch(error) {
     document.getElementById('loadingDiv').style.display = 'none';
     document.getElementById('buyBtn').style.display = 'block';
-    document.getElementById('error2').textContent = 'Could not find number. Try a different area code!';
+    document.getElementById('error2').textContent = 'Could not find number. Please try again!';
     document.getElementById('error2').style.display = 'block';
   }
 }
